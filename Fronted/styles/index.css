@@ -1,0 +1,74 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Navbar stuff */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+}
+
+#logo {
+  padding-right: 10px;
+  color: aliceblue;
+}
+
+main {
+  padding: 20px 0px;
+}
+#gameImg {
+  max-width: 80%;
+  height: 20%;
+  object-fit: contain;
+}
+#image-container {
+  display: flex;
+  justify-content: center;
+  border-bottom: solid black 5px;
+}
+
+#game-description {
+  margin: 0px 10px 0px 10px;
+}
+
+#about {
+  text-align: center;
+  text-decoration: underline;
+}
+
+#play-button {
+  background-color: #12c197;
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  height: 30px;
+  align-items: center;
+  margin: 50px auto;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  height: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#icons-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-basis: 30%;
+}
+
+#tag {
+  margin: 0;
+  padding: 0;
+  color: aliceblue;
+}
