@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/leaderboard.css" />
     <title>Card Survival Leaderboard</title>
   </head>
   <body>
     <nav>
-      <ul>
-        <li>menu</li>
-        <li>logo</li>
-      </ul>
+      <img class="burger" src="./assets/burger.svg" alt="" />
+      <div id="logo">Logo</div>
     </nav>
     <main>
+      <h1>Top Scores</h1>
       <table id="top_alltime">
         <tr>
-          <th>Top 5 Scores All Time</th>
+          <th class="header" colspan="4">Top 5 Scores All Time</th>
         </tr>
         <tr>
           <th>Rank</th>
@@ -52,11 +52,14 @@
           <td>Juju</td>
           <td>1500</td>
           <td>12:00</td>
+        </tr>
+        <tr>
+          <td class="empty" colspan="4">0</td>
         </tr>
       </table>
       <table id="top_today">
         <tr>
-          <th>Top 5 Scores Today</th>
+          <th class="header" colspan="4">Top 5 Scores Today</th>
         </tr>
         <tr>
           <th>Rank</th>
@@ -94,7 +97,26 @@
           <td>1500</td>
           <td>12:00</td>
         </tr>
+        <tr>
+          <td class="empty" colspan="4">0</td>
+        </tr>
       </table>
     </main>
+    <footer>
+      <div id="icons-container">
+        <a href="" class="icons"
+          ><i class="fa-brands fa-github fa-lg fa-inverse"></i
+        ></a>
+        <a href="" class="icons"
+          ><i class="fa-brands fa-linkedin fa-lg fa-inverse"></i
+        ></a>
+        <a href="" class="icons"
+          ><i class="fa-regular fa-envelope fa-lg fa-inverse"></i
+        ></a>
+      </div>
+      <div id="created">
+        <p id="tag">Created by Alexander Gomez</p>
+      </div>
+    </footer>
   </body>
 </html>
