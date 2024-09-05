@@ -1,0 +1,56 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+/* Nav bar styles */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+}
+
+.burger {
+  width: 60px;
+  height: 60px;
+}
+
+#logo {
+  padding-right: 10px;
+  color: aliceblue;
+}
+/* End of navbar styles */
+/* Footer Styles */
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  height: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#icons-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-basis: 30%;
+}
+
+#tag {
+  margin: 0;
+  padding: 0;
+  color: aliceblue;
+}
+
+main {
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightgray;
+  max-width: 80%;
+  height: 700px;
+}
