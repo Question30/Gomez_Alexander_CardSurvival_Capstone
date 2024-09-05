@@ -2,8 +2,7 @@ body {
   margin: 0px;
   padding: 0px;
 }
-
-/* Navbar stuff */
+/* Nav bar styles */
 nav {
   display: flex;
   justify-content: space-between;
@@ -21,39 +20,6 @@ nav {
   color: aliceblue;
 }
 /* End of navbar styles */
-main {
-  padding: 20px 0px;
-}
-#gameImg {
-  max-width: 80%;
-  height: 20%;
-  object-fit: contain;
-}
-#image-container {
-  display: flex;
-  justify-content: center;
-  border-bottom: solid black 5px;
-}
-
-#game-description {
-  margin: 0px 10px 0px 10px;
-}
-
-#about {
-  text-align: center;
-  text-decoration: underline;
-}
-
-#play-button {
-  background-color: #12c197;
-  display: flex;
-  justify-content: center;
-  width: 60%;
-  height: 30px;
-  align-items: center;
-  margin: 50px auto;
-}
-
 /* Footer Styles */
 footer {
   position: fixed;
@@ -78,4 +44,40 @@ footer {
   padding: 0;
   color: aliceblue;
 }
-/* End of Footer Styels */
+
+/* End of footer styles */
+
+main {
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightgray;
+  max-width: 80%;
+}
+
+/* Form Styles */
+.login-form {
+  min-height: 570px;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 80%;
+  gap: 30px;
+}
+
+.labels {
+  font-size: x-large;
+}
+
+.inputs {
+  height: 30px;
+}
+
+.button {
+  width: 50%;
+  height: 30px;
+  background-color: aliceblue;
+  margin: 0px auto;
+}
