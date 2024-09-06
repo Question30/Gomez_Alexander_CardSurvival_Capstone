@@ -45,16 +45,47 @@ footer {
   color: aliceblue;
 }
 
+/* End of footer styles */
 main {
-  margin: 80px auto;
+  margin: 40px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: lightgray;
   max-width: 80%;
-  height: 700px;
+  background-color: lightgray;
 }
 
+/* Form Styles */
+.support-form {
+  min-height: 570px;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 80%;
+  gap: 30px;
+  padding: 5px;
+}
+
+.labels {
+  font-size: x-large;
+}
+
+.inputs {
+  height: 30px;
+}
+
+.button {
+  width: 50%;
+  height: 30px;
+  background-color: aliceblue;
+  margin: 0px auto;
+}
+
+h2 {
+  text-align: center;
+  padding: 10px;
+}
 /* Sidebar nav */
 .sidenav {
   height: 100%;

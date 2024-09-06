@@ -4,11 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/leaderboard.css" />
+    <script
+      src="https://kit.fontawesome.com/50a16b1860.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js" defer></script>
     <title>Card Survival Leaderboard</title>
   </head>
   <body>
+    <div id="mySidenav" class="sidenav">
+      <img
+        class="burger"
+        src="./assets/burger.svg"
+        alt="menu"
+        onclick="closeNav()"
+        id="closeBtn"
+      />
+      <a href="login.html">Login/Signup</a>
+      <a href="game.html">Play</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="support.html">Support</a>
+    </div>
     <nav>
-      <img class="burger" src="./assets/burger.svg" alt="" />
+      <img
+        class="burger"
+        src="./assets/burger.svg"
+        alt=""
+        onclick="openNav()"
+      />
       <div id="logo">Logo</div>
     </nav>
     <main>

@@ -8,11 +8,30 @@
       src="https://kit.fontawesome.com/50a16b1860.js"
       crossorigin="anonymous"
     ></script>
+    <script src="app.js" defer></script>
     <title>Card Survival</title>
   </head>
   <body>
+    <div id="mySidenav" class="sidenav">
+      <img
+        class="burger"
+        src="./assets/burger.svg"
+        alt="menu"
+        onclick="closeNav()"
+        id="closeBtn"
+      />
+      <a href="index.html">Home</a>
+      <a href="login.html">Login/Signup</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="support.html">Support</a>
+    </div>
     <nav>
-      <img class="burger" src="./assets/burger.svg" alt="" />
+      <img
+        class="burger"
+        src="./assets/burger.svg"
+        alt=""
+        onclick="openNav()"
+      />
       <div id="logo">Logo</div>
     </nav>
     <main>

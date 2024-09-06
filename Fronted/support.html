@@ -3,36 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/support.css" />
+    <script
+      src="https://kit.fontawesome.com/50a16b1860.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js"></script>
     <title>Card Survival Support</title>
   </head>
   <body>
+    <div id="mySidenav" class="sidenav">
+      <img
+        class="burger"
+        src="./assets/burger.svg"
+        alt="menu"
+        onclick="closeNav()"
+        id="closeBtn"
+      />
+      <a href="index.html">Home</a>
+      <a href="login.html">Login/Signup</a>
+      <a href="game.html">Play</a>
+      <a href="leaderboard.html">Leaderboard</a>
+    </div>
     <nav>
-      <ul>
-        <li>menu</li>
-        <li>logo</li>
-      </ul>
+      <img
+        class="burger"
+        src="./assets/burger.svg"
+        alt=""
+        onclick="openNav()"
+      />
+      <div id="logo">Logo</div>
     </nav>
+    <h2>Have an issue or question? Complete the form below.</h2>
     <main>
-      <h2>Have an issue or question? Complete the form below.</h2>
       <form action="" class="support-form">
-        <div>
-          <label for="email"> Email </label>
-          <input type="email" name="email" id="email" />
-        </div>
-        <div>
-          <label for="dropdown">Option</label>
-          <select name="dropdown" id="dropdown">
-            <option value="issue">Issue</option>
-            <option value="bug-report">Bug Report</option>
-            <option value="question">Question</option>
-          </select>
-        </div>
-        <div>
-          <label for="details">Details:</label>
-          <textarea name="details" id="details"></textarea>
-        </div>
-        <button>Submit</button>
+        <label class="labels" for="email"> Email </label>
+        <input class="inputs" type="email" name="email" id="email" />
+
+        <label class="labels" for="dropdown">Option</label>
+        <select class="inputs" name="dropdown" id="dropdown">
+          <option value="issue">Issue</option>
+          <option value="bug-report">Bug Report</option>
+          <option value="question">Question</option>
+        </select>
+
+        <label class="labels" for="details">Details:</label>
+        <textarea cols="10" rows="10" name="details" id="details"></textarea>
+
+        <button class="button">Submit</button>
       </form>
     </main>
+    <footer>
+      <div id="icons-container">
+        <a href="" class="icons"
+          ><i class="fa-brands fa-github fa-lg fa-inverse"></i
+        ></a>
+        <a href="" class="icons"
+          ><i class="fa-brands fa-linkedin fa-lg fa-inverse"></i
+        ></a>
+        <a href="" class="icons"
+          ><i class="fa-regular fa-envelope fa-lg fa-inverse"></i
+        ></a>
+      </div>
+      <div id="created">
+        <p id="tag">Created by Alexander Gomez</p>
+      </div>
+    </footer>
   </body>
 </html>
