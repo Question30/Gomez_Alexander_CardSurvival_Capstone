@@ -8,7 +8,7 @@
       src="https://kit.fontawesome.com/50a16b1860.js"
       crossorigin="anonymous"
     ></script>
-    <script src="app.js"></script>
+    <script defer src="app.js"></script>
     <title>Card Survival Signup</title>
   </head>
   <body>
@@ -35,15 +35,27 @@
       <div id="logo">Logo</div>
     </nav>
     <main>
-      <form action="" class="signup-form">
+      <form class="signup-form" id="form" name="signup">
         <label class="labels" for="username"> Username: </label>
-        <input class="inputs" type="text" name="username" id="username" />
+        <input
+          class="inputs"
+          type="text"
+          name="username"
+          id="username"
+          required
+        />
 
         <label class="labels" for="email"> Email: </label>
-        <input class="inputs" type="email" name="email" id="email" />
+        <input class="inputs" type="email" name="email" id="email" required />
 
         <label class="labels" for="password">Password :</label>
-        <input class="inputs" type="password" name="password" id="password" />
+        <input
+          class="inputs"
+          type="password"
+          name="password"
+          id="password"
+          required
+        />
 
         <label class="labels" for="confirm-password">Confirm Password:</label>
         <input
@@ -51,9 +63,10 @@
           type="password"
           name="confirm-password"
           id="confirm-password"
+          required
         />
 
-        <button class="button">Login</button>
+        <button class="button" id="Signup">Signup</button>
       </form>
       <p>Already have an account? Login <a href="login.html">here</a></p>
     </main>
