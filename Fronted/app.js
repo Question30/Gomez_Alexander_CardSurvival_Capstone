@@ -9,15 +9,16 @@ function closeNav() {
 //form event listner
 
 const formEl = document.getElementById("form");
-
 if (formEl !== null) {
   formEl.addEventListener("submit", (event) => {
     event.preventDefault();
     let response;
     if (event.target.name === "login") {
       response = handleLogin(event);
-    } else {
+    } else if (event.target.name === "signup") {
       response = handleSignup(event);
+    } else {
+      response = handleSupport(event);
     }
 
     console.log(response);
@@ -27,8 +28,8 @@ if (formEl !== null) {
 //Handle Login submission
 function handleLogin(event) {
   const response = {
-    email: event.target[0].value,
-    password: event.target[1].value,
+    email: event.target.email.value,
+    password: event.target.pasword.value,
   };
   console.log(response);
   window.location.replace("http://localhost:5500/index.html");
@@ -38,15 +39,15 @@ function handleLogin(event) {
 //Handle Sign up Submission
 function handleSignup(event) {
   const response = {
-    username: event.target[0].value,
-    email: event.target[1].value,
-    password: event.target[2].value,
-    confirmPassword: event.target[3].value,
+    username: event.target.username.value,
+    email: event.target.email.value,
+    password: event.target.password.value,
+    confirmPassword: event.target.confirm_password.value,
   };
 
   if (checkPassword(response.password, response.confirmPassword)) {
     console.log(response);
-    window.location.replace("http://localhost:5500/login.html");
+    // window.location.replace("http://localhost:5500/login.html");
   } else {
     displayError();
     return;
@@ -68,4 +69,16 @@ function displayError() {
   errorMessage.style.textAlign = "center";
 
   formEl.appendChild(errorMessage);
+}
+
+//Contact Form
+function handleSupport(event) {
+  console.dir(event.target);
+  const response = {
+    email: event.target.email.value,
+    subject: event.target.dropdown.value,
+    content: event.target.details.value,
+  };
+  console.log(response);
+  alert(response.subject + " sent!");
 }
