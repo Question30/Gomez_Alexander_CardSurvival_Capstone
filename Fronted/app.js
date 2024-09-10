@@ -29,10 +29,10 @@ if (formEl !== null) {
 function handleLogin(event) {
   const response = {
     email: event.target.email.value,
-    password: event.target.pasword.value,
+    password: event.target.password.value,
   };
   console.log(response);
-  window.location.replace("http://localhost:5500/index.html");
+  // window.location.replace("http://localhost:5500/src/index.html");
   return response;
 }
 
@@ -47,7 +47,7 @@ function handleSignup(event) {
 
   if (checkPassword(response.password, response.confirmPassword)) {
     console.log(response);
-    // window.location.replace("http://localhost:5500/login.html");
+    // window.location.replace("http://localhost:5500/src/login.html");
   } else {
     displayError();
     return;
@@ -62,13 +62,18 @@ function checkPassword(password, confirmedPassword) {
 
 //Create Error message under Login
 function displayError() {
-  const errorMessage = document.createElement("div");
+  const errorMessage = document.createElement("p");
   errorMessage.innerText = "Error your passwords do not match!";
 
   errorMessage.style.color = "red";
   errorMessage.style.textAlign = "center";
+  errorMessage.style.textWrap = "wrap";
 
   formEl.appendChild(errorMessage);
+
+  setTimeout(() => {
+    formEl.removeChild(errorMessage);
+  }, 1000);
 }
 
 //Contact Form

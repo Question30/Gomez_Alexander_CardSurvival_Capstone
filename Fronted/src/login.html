@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/50a16b1860.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../output.css" />
+    <script src="../app.js" defer></script>
+    <title>Card Survival Login</title>
+  </head>
+  <body class="">
+    <div
+      id="mySidenav"
+      class="h-screen w-0 fixed top-0 left-0 bg-black overflow-hidden transition duration-1000 pt-14 z-10"
+    >
+      <img
+        class="absolute top-0"
+        class="burger"
+        src="../assets/burger.svg"
+        alt="menu"
+        onclick="closeNav()"
+        id="closeBtn"
+      />
+      <a
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        href="index.html"
+        >Home</a
+      >
+      <a
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        href="game.html"
+        >Play</a
+      >
+      <a
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        href="leaderboard.html"
+        >Leaderboard</a
+      >
+      <a
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        href="support.html"
+        >Support</a
+      >
+    </div>
+
+    <nav class="flex justify-between bg-slate-800 items-center">
+      <img src="../assets/burger.svg" alt="" onclick="openNav()" />
+      <div id="logo" class="pr-2.5 text-slate-200">Logo</div>
+    </nav>
+    <main class="flex flex-col mx-auto mt-20 items-center bg-gray-300 max-w-80">
+      <form
+        id="form"
+        class="flex flex-col min-h-96 justify-center gap-7 m-3/4"
+        name="login"
+      >
+        <label class="text-xl" for="email"> Email: </label>
+        <input class="h-7" type="email" name="email" id="email" required />
+
+        <label class="text-xl" for="password">Password:</label>
+        <input
+          class="h-7"
+          type="password"
+          name="password"
+          id="password"
+          required
+        />
+
+        <button class="w-1/2 h-8 bg-sky-200 mx-auto">Login</button>
+      </form>
+      <p class="p-2">
+        Don't have an account? Signup
+        <a class="text-blue-600 underline" href="signup.html">here</a>
+      </p>
+    </main>
+    <footer
+      class="fixed left-0 bottom-0 w-screen bg-slate-800 flex justify-between"
+    >
+      <div
+        class="flex justify-around items-center basis-4/12"
+        id="icons-container"
+      >
+        <a href="" class="icons"
+          ><i class="fa-brands fa-github fa-lg fa-inverse"></i
+        ></a>
+        <a href="" class="icons"
+          ><i class="fa-brands fa-linkedin fa-lg fa-inverse"></i
+        ></a>
+        <a href="" class="icons"
+          ><i class="fa-regular fa-envelope fa-lg fa-inverse"></i
+        ></a>
+      </div>
+      <div id="created">
+        <p class="m-0 p-0 text-slate-200" id="tag">
+          Created by Alexander Gomez
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

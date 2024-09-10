@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="/styles/index.css" /> -->
+    <script
+      src="https://kit.fontawesome.com/50a16b1860.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../output.css" />
+    <script src="../app.js" defer></script>
+    <title>Card Survival Home</title>
+  </head>
+  <body class="m-0 p-0">
+    <div
+      id="mySidenav"
+      class="h-screen w-0 fixed top-0 left-0 bg-black overflow-hidden transition duration-1000 pt-14 z-10"
+    >
+      <img
+        class="absolute top-0"
+        src="../assets/burger.svg"
+        alt="menu"
+        onclick="closeNav()"
+        id="closeBtn"
+      />
+      <a
+        href="login.html"
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        >Login/Signup</a
+      >
+      <a
+        href="game.html"
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        >Play</a
+      >
+      <a
+        href="leaderboard.html"
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        >Leaderboard</a
+      >
+      <a
+        href="support.html"
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        >Support</a
+      >
+    </div>
+    <nav class="flex justify-between bg-slate-800 items-center">
+      <img src="../assets/burger.svg" alt="" onclick="openNav()" />
+      <div id="logo" class="pr-2.5 text-slate-200">Logo</div>
+    </nav>
+    <main class="py-5 px-0">
+      <div
+        class="flex justify-center border-b-black border-b-4"
+        id="image-container"
+      >
+        <img
+          src="../assets/placeholder.png"
+          alt="Screenshot of the game or short gameplay video"
+          id="gameImg"
+        />
+      </div>
+      <section id="game-description"">
+        <h2 id="about" class="text-center underline text-xl">About the game</h2>
+        <p class="px-4">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
+          incidunt alias quia eius necessitatibus qui minus dolorem similique
+          ducimus quo doloribus cumque consequatur aspernatur iusto magni, sequi
+          sapiente distinctio excepturi? Corrupti, mollitia fuga? Quisquam,
+          doloremque quis nam, saepe quas cumque iusto enim, magni quidem animi
+          repudiandae! Quaerat exercitationem ipsa nisi repellendus commodi
+          provident, officia at, ea dolores consectetur aut minima. Fuga error
+          asperiores doloremque, libero voluptatum cumque officiis deleniti
+          animi provident! Soluta ratione, repellat atque veritatis corrupti
+          officiis earum doloremque voluptas ex itaque, sapiente, cum voluptate
+          consectetur qui. Architecto, similique!
+        </p>
+      </section>
+      <div id="play-button" class="bg-green-600 flex justify-center w-7/12 h-8 items-center my-12 mx-auto">
+        <a href="game.html">Play</a>
+      </div>
+    </main>
+    <footer class="fixed left-0 bottom-0 w-screen bg-slate-800 flex justify-between">
+      <div class="flex justify-around items-center basis-4/12" id="icons-container">
+        <a href="" class="icons"
+          ><i class="fa-brands fa-github fa-lg fa-inverse"></i
+        ></a>
+        <a href="" class="icons"
+          ><i class="fa-brands fa-linkedin fa-lg fa-inverse"></i
+        ></a>
+        <a href="" class="icons"
+          ><i class="fa-regular fa-envelope fa-lg fa-inverse"></i
+        ></a>
+      </div>
+      <div id="created">
+        <p class="m-0 p-0 text-slate-200" id="tag">Created by Abdoul</p>
+      </div>
+    </footer>
+  </body>
+</html>

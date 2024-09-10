@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/50a16b1860.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../output.css" />
+    <script src="../app.js" defer></script>
+    <title>Card Survival Leaderboard</title>
+  </head>
+  <body>
+    <div
+      id="mySidenav"
+      class="h-screen w-0 fixed top-0 left-0 bg-black overflow-hidden transition duration-1000 pt-14 z-10"
+    >
+      <img
+        class="absolute top-0"
+        src="../assets/burger.svg"
+        alt="menu"
+        onclick="closeNav()"
+        id="closeBtn"
+      />
+      <a
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        href="login.html"
+        >Login/Signup</a
+      >
+      <a
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        href="game.html"
+        >Play</a
+      >
+      <a
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        href="leaderboard.html"
+        >Leaderboard</a
+      >
+      <a
+        class="pb-8 px-2 pt-2 no-underline text-slate-300 block transition duration-300 hover:text-slate-500"
+        href="support.html"
+        >Support</a
+      >
+    </div>
+    <nav class="flex justify-between bg-slate-800 items-center">
+      <img
+        class="burger"
+        src="../assets/burger.svg"
+        alt=""
+        onclick="openNav()"
+      />
+      <div class="pr-2.5 text-slate-200" id="logo">Logo</div>
+    </nav>
+    <main class="my-28 mx-auto flex flex-col items-center gap-12">
+      <h1 class="font-bold text-xl">Top Scores</h1>
+      <table
+        class="w-10/12 border-2 border-collapse border-slate-950"
+        id="top_alltime"
+      >
+        <tr>
+          <th class="bg-gray-300 border-2 border-slate-950" colspan="4">
+            Top 5 Scores All Time
+          </th>
+        </tr>
+        <tr>
+          <th class="border-2 border-slate-950">Rank</th>
+          <th class="border-2 border-slate-950">UserName</th>
+          <th class="border-2 border-slate-950">Score</th>
+          <th class="border-2 border-slate-950">Time</th>
+        </tr>
+        <tr>
+          <td class="border-2 border-slate-950">1</td>
+          <td class="border-2 border-slate-950">Alex</td>
+          <td class="border-2 border-slate-950">30000</td>
+          <td class="border-2 border-slate-950">30:00</td>
+        </tr>
+        <tr>
+          <td class="border-2 border-slate-950">2</td>
+          <td class="border-2 border-slate-950">John</td>
+          <td class="border-2 border-slate-950">25000</td>
+          <td class="border-2 border-slate-950">25:00</td>
+        </tr>
+        <tr>
+          <td class="border-2 border-slate-950">3</td>
+          <td class="border-2 border-slate-950">Jane</td>
+          <td class="border-2 border-slate-950">22000</td>
+          <td class="border-2 border-slate-950">22:00</td>
+        </tr>
+        <tr>
+          <td class="border-2 border-slate-950">4</td>
+          <td class="border-2 border-slate-950">Kage</td>
+          <td class="border-2 border-slate-950">18000</td>
+          <td class="border-2 border-slate-950">19:00</td>
+        </tr>
+        <tr>
+          <td class="border-2 border-slate-950">5</td>
+          <td class="border-2 border-slate-950">Juju</td>
+          <td class="border-2 border-slate-950">1500</td>
+          <td class="border-2 border-slate-950">12:00</td>
+        </tr>
+        <tr>
+          <td class="bg-gray-200 text-gray-200" colspan="4">0</td>
+        </tr>
+      </table>
+      <table
+        class="w-10/12 border-2 border-collapse border-slate-950"
+        id="top_today"
+      >
+        <tr>
+          <th class="bg-gray-300 border-2 border-slate-950" colspan="4">
+            Top 5 Scores Today
+          </th>
+        </tr>
+        <tr>
+          <th class="border-2 border-slate-950">Rank</th>
+          <th class="border-2 border-slate-950">UserName</th>
+          <th class="border-2 border-slate-950">Score</th>
+          <th class="border-2 border-slate-950">Time</th>
+        </tr>
+        <tr>
+          <td class="border-2 border-slate-950">1</td>
+          <td class="border-2 border-slate-950">Alex</td>
+          <td class="border-2 border-slate-950">30000</td>
+          <td class="border-2 border-slate-950">30:00</td>
+        </tr>
+        <tr>
+          <td class="border-2 border-slate-950">2</td>
+          <td class="border-2 border-slate-950">John</td>
+          <td class="border-2 border-slate-950">25000</td>
+          <td class="border-2 border-slate-950">25:00</td>
+        </tr>
+        <tr>
+          <td class="border-2 border-slate-950">3</td>
+          <td class="border-2 border-slate-950">Jane</td>
+          <td class="border-2 border-slate-950">22000</td>
+          <td class="border-2 border-slate-950">22:00</td>
+        </tr>
+        <tr>
+          <td class="border-2 border-slate-950">4</td>
+          <td class="border-2 border-slate-950">Kage</td>
+          <td class="border-2 border-slate-950">18000</td>
+          <td class="border-2 border-slate-950">19:00</td>
+        </tr>
+        <tr>
+          <td class="border-2 border-slate-950">5</td>
+          <td class="border-2 border-slate-950">Juju</td>
+          <td class="border-2 border-slate-950">1500</td>
+          <td class="border-2 border-slate-950">12:00</td>
+        </tr>
+        <tr>
+          <td class="bg-gray-200 text-gray-200" colspan="4">0</td>
+        </tr>
+      </table>
+    </main>
+    <footer
+      class="fixed left-0 bottom-0 w-screen bg-slate-800 flex justify-between"
+    >
+      <div
+        class="flex justify-around items-center basis-4/12"
+        id="icons-container"
+      >
+        <a href="" class="icons"
+          ><i class="fa-brands fa-github fa-lg fa-inverse"></i
+        ></a>
+        <a href="" class="icons"
+          ><i class="fa-brands fa-linkedin fa-lg fa-inverse"></i
+        ></a>
+        <a href="" class="icons"
+          ><i class="fa-regular fa-envelope fa-lg fa-inverse"></i
+        ></a>
+      </div>
+      <div id="created">
+        <p class="m-0 p-0 text-slate-200" id="tag">
+          Created by Alexander Gomez
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
