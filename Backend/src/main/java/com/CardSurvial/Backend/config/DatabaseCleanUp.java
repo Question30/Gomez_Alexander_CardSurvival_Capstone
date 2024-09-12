@@ -34,6 +34,7 @@ public class DatabaseCleanUp {
             try(Connection connection = dataSource.getConnection()){
 
                 Statement statement = connection.createStatement();
+                statement.executeUpdate("DROP TABLE IF EXISTS user_scores");
                 statement.executeUpdate("DROP TABLE IF EXISTS scores");
                 statement.executeUpdate("DROP TABLE IF EXISTS user");
 
