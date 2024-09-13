@@ -19,7 +19,8 @@ public class WebCorsConfig {
 
         http.cors(Customizer.withDefaults()).csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/test", "/api/users/**").permitAll()
+                        .requestMatchers("/test", "/api/users/**",
+                                "/api/auth/**").permitAll()
                         .anyRequest().authenticated());
 
         return http.build();

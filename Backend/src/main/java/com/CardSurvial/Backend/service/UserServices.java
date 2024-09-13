@@ -6,6 +6,8 @@ import com.CardSurvial.Backend.repository.ScoresRepository;
 import com.CardSurvial.Backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Optionals;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +20,12 @@ public class UserServices {
     ScoresRepository scoresRepository;
 
     @Autowired
-    public UserServices(UserRepository userRepository, ScoresRepository scoresRepository){
+    private BCryptPasswordEncoder encoder;
+
+
+    @Autowired
+    public UserServices(UserRepository userRepository,
+                        ScoresRepository scoresRepository){
         this.userRepository = userRepository;
         this.scoresRepository =scoresRepository;
     }
@@ -46,9 +53,24 @@ public class UserServices {
 
     //Add user to database
     public String addUser(User user){
+
+        user.setPassword(encoder.encode(user.getPassword()));
+        System.out.println(user.getPassword());
         userRepository.save(user);
         return "Successfully added " + user.getUserName();
     }
+    //Login user
+    public String login(User user){
+        User foundUser = this.findByUsername(user.getUserName());
+        if(foundUser != null){
+            if(encoder.matches(user.getPassword(), foundUser.getPassword())){
+                return "Successfully logged in";
+            }
+        }
+
+        return "Incorrect Username or Password";
+    }
+
 
     //update User by email
     public String updateUser(String username, User user){
