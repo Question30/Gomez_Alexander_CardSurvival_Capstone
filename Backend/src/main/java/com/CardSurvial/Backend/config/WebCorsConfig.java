@@ -19,7 +19,7 @@ public class WebCorsConfig {
 
         http.cors(Customizer.withDefaults()).csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/test", "/api/users/**",
+                        .requestMatchers( "/api/users/**",
                                 "/api/auth/**").permitAll()
                         .anyRequest().authenticated());
 
@@ -29,7 +29,7 @@ public class WebCorsConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("*");
+        config.addAllowedOrigin("http://localhost:5500");
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
         config.setAllowCredentials(true);
