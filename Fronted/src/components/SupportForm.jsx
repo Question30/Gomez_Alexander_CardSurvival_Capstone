@@ -19,26 +19,26 @@ function SupportForm() {
   return (
     <form
       action=""
-      class="flex flex-col justify-center w-3/4 gap-7 bg-gray-200 p-10"
+      className="flex flex-col justify-center w-3/4 gap-7 bg-gray-200 p-10"
       onSubmit={handleSubmit}
     >
-      <label class="text-xl" htmlFor="email">
+      <label className="text-xl" htmlFor="email">
         {" "}
         Email{" "}
       </label>
       <input
-        class="inputs"
+        className="inputs"
         type="email"
         name="email"
         value={formData.email}
         onChange={handleChange}
       />
 
-      <label class="text-xl" htmlFor="dropdown">
+      <label className="text-xl" htmlFor="dropdown">
         Option
       </label>
       <select
-        class="inputs"
+        className="inputs"
         name="dropdown"
         id="dropdown"
         onChange={handleChange}
@@ -49,7 +49,7 @@ function SupportForm() {
         <option value="question">Question</option>
       </select>
 
-      <label class="text-xl" htmlFor="details">
+      <label className="text-xl" htmlFor="details">
         Details:
       </label>
       <textarea
@@ -61,7 +61,7 @@ function SupportForm() {
         onChange={handleChange}
       ></textarea>
 
-      <button class="w-1/2 h-8 bg-sky-200 mx-auto">Submit</button>
+      <button className="w-1/2 h-8 bg-sky-200 mx-auto">Submit</button>
     </form>
   );
 }

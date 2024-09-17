@@ -25,7 +25,7 @@ function SignupForm({ setShowLogin, showLogin }) {
         name="signup"
         onSubmit={handleSubmit}
       >
-        <label class="text-xl" for="username">
+        <label class="text-xl" htmlFor="username">
           {" "}
           Username:{" "}
         </label>
@@ -39,7 +39,7 @@ function SignupForm({ setShowLogin, showLogin }) {
           required
         />
 
-        <label class="text-xl" for="email">
+        <label class="text-xl" htmlFor="email">
           {" "}
           Email:{" "}
         </label>
@@ -53,7 +53,7 @@ function SignupForm({ setShowLogin, showLogin }) {
           required
         />
 
-        <label class="text-xl" for="password">
+        <label class="text-xl" htmlFor="password">
           Password :
         </label>
         <input
@@ -63,6 +63,7 @@ function SignupForm({ setShowLogin, showLogin }) {
           id="password"
           value={formData.password}
           onChange={handleChange}
+          autoComplete=""
           required
         />
 

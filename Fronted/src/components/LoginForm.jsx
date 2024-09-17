@@ -47,12 +47,13 @@ function LoginForm({ setShowLogin, showLogin }) {
           id="password"
           value={formData.password}
           onChange={handleChange}
+          autoComplete=""
           required
         />
 
         <button className="w-1/2 h-8 bg-sky-200 mx-auto">Login</button>
       </form>
-      <p class="p-2">
+      <p className="p-2">
         Don't have an account? Signup
         <button
           className="text-blue-600 underline pl-1"
