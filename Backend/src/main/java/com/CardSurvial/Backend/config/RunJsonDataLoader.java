@@ -32,8 +32,8 @@ public class RunJsonDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        loadScores();
-        loadUsers();
+//        loadScores();
+//        loadUsers();
     }
 
     public void loadUsers(){

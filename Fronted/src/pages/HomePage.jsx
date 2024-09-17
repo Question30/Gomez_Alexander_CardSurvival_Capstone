@@ -28,8 +28,8 @@ function HomePage() {
           </p>
         </section>
       </div>
-      <div className="bg-green-600 flex justify-center w-7/12 h-40 rounded-full items-center my-12 mx-auto ">
-        <a className="text-9xl text-slate-200">PLAY</a>
+      <div className="bg-green-600 flex justify-center w-7/12 h-40 rounded-full items-center my-24 mx-auto ">
+        <button className="text-9xl text-slate-200">PLAY</button>
       </div>
       <Footer />
     </div>
