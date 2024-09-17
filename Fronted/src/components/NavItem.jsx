@@ -27,7 +27,7 @@ function NavItem({ link }) {
 
   return (
     <Link
-      className="p-2 no-underline text-slate-300 block  hover:text-slate-500 text-2xl"
+      className="p-4 no-underline text-slate-300 block  hover:text-slate-500 text-2xl"
       to={getPath(link)}
     >
       {link}
