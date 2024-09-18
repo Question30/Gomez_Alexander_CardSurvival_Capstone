@@ -32,10 +32,10 @@ public class UserController {
     }
 
     //Post user
-    @PostMapping("")
-    public String addUser(@RequestBody User user){
-        return userServices.addUser(user);
-    }
+//    @PostMapping("")
+//    public String addUser(@RequestBody User user){
+//        return userServices.addUser(user);
+//    }
 
 
 

@@ -52,16 +52,22 @@ public class UserServices {
     //Get all users and filters for a specified username
     public User findByUsername(String username){
         List<User> users = this.getAllUsers();
-        return users.stream().filter(user -> user.getUsername().equals(username)).findFirst().get();
+        Optional<User> userInfo =
+                users.stream().filter(user -> user.getUsername().equals(username)).findFirst();
+        if(userInfo.isPresent()){
+            return userInfo.get();
+        }
+        else return null;
     }
 
     //Add user to database
-    public String addUser(User user){
-
+    public Integer addUser(User user){
+        if(userExists(user)){
+            return -1;
+        }
         user.setPassword(encoder.encode(user.getPassword()));
-        System.out.println(user.getPassword());
         userRepository.save(user);
-        return "Successfully added " + user.getUsername();
+        return user.getId();
     }
     //Login user
     public String login(User user){
@@ -111,4 +117,10 @@ public class UserServices {
     }
 
 
+
+    private boolean userExists(User user){
+        User userOptional = findByUsername(user.getUsername());
+
+        return userOptional != null;
+    }
 }

@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import palcehoder from "../assets/placeholder.png";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   return (
@@ -29,7 +30,9 @@ function HomePage() {
         </section>
       </div>
       <div className="bg-green-600 flex justify-center w-7/12 h-40 rounded-full items-center my-24 mx-auto ">
-        <button className="text-9xl text-slate-200">PLAY</button>
+        <Link to={"/game"} className="text-9xl text-slate-200">
+          PLAY
+        </Link>
       </div>
       <Footer />
     </div>

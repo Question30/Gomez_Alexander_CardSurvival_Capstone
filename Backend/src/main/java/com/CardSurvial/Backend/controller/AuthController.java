@@ -1,9 +1,12 @@
 package com.CardSurvial.Backend.controller;
 
 import com.CardSurvial.Backend.common.AuthRequest;
+import com.CardSurvial.Backend.common.Token;
 import com.CardSurvial.Backend.model.User;
 import com.CardSurvial.Backend.service.JwtService;
 import com.CardSurvial.Backend.service.UserServices;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("/api/auth")
@@ -23,17 +28,27 @@ public class AuthController {
 
     private JwtService jwtService;
 
+    private ObjectMapper mapper;
+
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    public AuthController(UserServices userServices, JwtService jwtService){
+    public AuthController(UserServices userServices, JwtService jwtService,
+                          ObjectMapper mapper){
         this.userServices = userServices;
         this.jwtService = jwtService;
+        this.mapper =mapper;
     }
 
     @PostMapping("/signup")
-    public String addUser(@RequestBody User user){
-        return userServices.addUser(user);
+    public Token addUser(@RequestBody User user){
+        if(userServices.addUser(user) < 1){
+            return null;
+        }
+        Token token = new Token();
+        token.setToken(jwtService.generateToken(user.getUsername()));
+        return token;
+
     }
 
     @PostMapping("/login")
