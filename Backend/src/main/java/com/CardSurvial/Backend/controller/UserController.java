@@ -2,13 +2,11 @@ package com.CardSurvial.Backend.controller;
 
 import com.CardSurvial.Backend.model.Scores;
 import com.CardSurvial.Backend.model.User;
-import com.CardSurvial.Backend.repository.UserRepository;
 import com.CardSurvial.Backend.service.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -39,6 +37,8 @@ public class UserController {
         return userServices.addUser(user);
     }
 
+
+
     @PutMapping("/score/{username}")
     public String addScore(@PathVariable String username,
                            @RequestBody Scores score){
@@ -57,4 +57,5 @@ public class UserController {
     public String deleteUserById(@PathVariable String username){
        return userServices.deleteUser(username);
     }
+
 }

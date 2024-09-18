@@ -1,12 +1,15 @@
 package com.CardSurvial.Backend.service;
 
+import com.CardSurvial.Backend.common.UserInfoDetails;
 import com.CardSurvial.Backend.model.Scores;
 import com.CardSurvial.Backend.model.User;
 import com.CardSurvial.Backend.repository.ScoresRepository;
 import com.CardSurvial.Backend.repository.UserRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Optionals;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@NoArgsConstructor
 @Service
 public class UserServices {
     UserRepository userRepository;
@@ -48,7 +52,7 @@ public class UserServices {
     //Get all users and filters for a specified username
     public User findByUsername(String username){
         List<User> users = this.getAllUsers();
-        return users.stream().filter(user -> user.getUserName().equals(username)).findFirst().get();
+        return users.stream().filter(user -> user.getUsername().equals(username)).findFirst().get();
     }
 
     //Add user to database
@@ -57,11 +61,11 @@ public class UserServices {
         user.setPassword(encoder.encode(user.getPassword()));
         System.out.println(user.getPassword());
         userRepository.save(user);
-        return "Successfully added " + user.getUserName();
+        return "Successfully added " + user.getUsername();
     }
     //Login user
     public String login(User user){
-        User foundUser = this.findByUsername(user.getUserName());
+        User foundUser = this.findByUsername(user.getUsername());
         if(foundUser != null){
             if(encoder.matches(user.getPassword(), foundUser.getPassword())){
                 return "Successfully logged in";
@@ -78,12 +82,12 @@ public class UserServices {
 
         if(Objects.nonNull(u)){
             u.setId(user.getId());
-            u.setUserName(user.getUserName());
+            u.setUsername(user.getUsername());
             u.setEmail(user.getEmail());
             u.setPassword(user.getPassword());
             u.setScores(user.getScores());
             userRepository.save(u);
-            return "Updated " + u.getUserName();
+            return "Updated " + u.getUsername();
         }
 
         return "User not found";
@@ -93,7 +97,7 @@ public class UserServices {
     public String deleteUser(String username){
         User user = this.findByUsername(username);
         userRepository.deleteById(user.getId());
-        return user.getUserName() + " has been deleted";
+        return user.getUsername() + " has been deleted";
     }
 
     //Add Score
@@ -105,4 +109,6 @@ public class UserServices {
 
         return "Scores: " + user.getScores();
     }
+
+
 }
