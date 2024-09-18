@@ -52,9 +52,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestBody User user){
-
-        return userServices.login(user);
+    public Token loginUser(@RequestBody User user){
+        if(userServices.login(user) < 1){
+            return null;
+        }
+        Token token = new Token();
+        token.setToken(jwtService.generateToken(user.getUsername()));
+        return token;
     }
 
     @PostMapping("/token")

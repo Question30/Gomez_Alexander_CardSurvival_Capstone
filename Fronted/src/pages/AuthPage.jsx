@@ -9,7 +9,7 @@ function AuthPage() {
 
   return (
     <>
-      <NavBar links={["Play", "Leaderboard", "Support", "Login/Signup"]} />
+      <NavBar links={["Home", "Play", "Leaderboard", "Support"]} />
 
       {showLogin ? (
         <LoginForm setShowLogin={setShowLogin} showLogin={showLogin} />

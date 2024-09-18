@@ -1,18 +1,29 @@
 import React, { useState } from "react";
+import * as userService from "../utilities/users-service";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm({ setShowLogin, showLogin }) {
+  const nav = useNavigate();
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
+  const [error, setError] = useState("");
+
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+    setError("");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
+    try {
+      const user = await userService.login(formData);
+      nav("/");
+    } catch (error) {
+      setError("Log in failed try again");
+    }
   };
 
   return (
@@ -23,16 +34,16 @@ function LoginForm({ setShowLogin, showLogin }) {
         name="login"
         onSubmit={handleSubmit}
       >
-        <label className="text-xl" htmlFor="email">
+        <label className="text-xl" htmlFor="username">
           {" "}
-          Email:{" "}
+          Username:{" "}
         </label>
         <input
           className="h-7"
-          type="email"
-          name="email"
-          id="email"
-          value={formData.email}
+          type="text"
+          name="username"
+          id="username"
+          value={formData.username}
           onChange={handleChange}
           required
         />
@@ -62,6 +73,7 @@ function LoginForm({ setShowLogin, showLogin }) {
           here
         </button>
       </p>
+      <p className="text-red-700">{error}</p>
     </main>
   );
 }

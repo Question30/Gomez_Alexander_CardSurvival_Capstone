@@ -1,8 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { signUp } from "../utilities/users-service";
+import { useNavigate } from "react-router-dom";
 
 function SignupForm({ setShowLogin, showLogin }) {
+  const nav = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -29,6 +32,7 @@ function SignupForm({ setShowLogin, showLogin }) {
       delete user.confirm_password;
 
       const username = await signUp(user);
+      nav("/");
     } catch (error) {
       setFormData({
         ...formData,

@@ -70,15 +70,16 @@ public class UserServices {
         return user.getId();
     }
     //Login user
-    public String login(User user){
+    public Integer login(User user){
+
         User foundUser = this.findByUsername(user.getUsername());
         if(foundUser != null){
             if(encoder.matches(user.getPassword(), foundUser.getPassword())){
-                return "Successfully logged in";
+                return 1;
             }
         }
 
-        return "Incorrect Username or Password";
+        return -1;
     }
 
 

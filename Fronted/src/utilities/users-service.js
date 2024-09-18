@@ -9,6 +9,14 @@ export async function signUp(userData) {
   console.log(getUser());
 }
 
+export async function login(credentials) {
+  const token = await usersApi.login(credentials);
+
+  localStorage.setItem("CSGToken", token.token);
+
+  return getUser();
+}
+
 export function getUser() {
   const token = getToken();
 
@@ -26,4 +34,8 @@ export function getToken() {
   }
 
   return token;
+}
+
+export function logout() {
+  localStorage.removeItem("CSGToken");
 }
