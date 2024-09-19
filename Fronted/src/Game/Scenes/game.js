@@ -1,9 +1,11 @@
 import Player from "../GameObjects/player";
+import EnemyGenerator from "../GameObjects/generateEnemies";
 
 export default class Game extends Phaser.Scene {
   constructor() {
     super({ key: "game" });
     this.player = null;
+    this.enemy = null;
   }
 
   init() {}
@@ -17,18 +19,21 @@ export default class Game extends Phaser.Scene {
     this.center_height = this.height / 2;
 
     this.cameras.main.setBackgroundColor(0x87ceeb);
-    this.player = new Player(
-      this,
-      this.center_width - 100,
-      this.center_height - 200
-    );
+    this.player = new Player(this, this.center_width, this.center_height);
 
+    this.addEnemies();
     this.addShots();
     this.addColliders();
   }
 
   update() {
     this.player.update();
+    this.enemies.update();
+  }
+
+  addEnemies() {
+    this.enemiesGroup = this.add.group();
+    this.enemies = new EnemyGenerator(this);
   }
 
   addShots() {
@@ -36,6 +41,36 @@ export default class Game extends Phaser.Scene {
   }
 
   addColliders() {
+    this.physics.add.collider(
+      this.enemiesGroup,
+      this.player,
+      this.killPlayer,
+      () => {
+        true;
+      },
+      this
+    );
+
+    this.physics.add.collider(
+      this.shots,
+      this.enemiesGroup,
+      this.destroyEnemy,
+      () => {
+        true;
+      },
+      this
+    );
+
+    this.physics.add.overlap(
+      this.shots,
+      this.enemiesGroup,
+      this.destroyEnemy,
+      () => {
+        return true;
+      },
+      this
+    );
+
     this.physics.world.on("worldbounds", this.onWorldBounds);
   }
 
@@ -44,5 +79,14 @@ export default class Game extends Phaser.Scene {
     if (["foeshot", "shot"].includes(name)) {
       body.gameObject.destroy();
     }
+  }
+
+  destroyEnemy(shot, enemy) {
+    enemy.dead();
+    shot.destroy();
+  }
+
+  killPlayer(enemy, player) {
+    player.dead();
   }
 }

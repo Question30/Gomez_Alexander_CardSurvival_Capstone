@@ -25,6 +25,7 @@ class Player extends Phaser.GameObjects.Rectangle {
       DOWN: true,
     };
   }
+  create() {}
 
   update() {
     if (this.W.isDown) {
@@ -41,6 +42,13 @@ class Player extends Phaser.GameObjects.Rectangle {
       this.setFacing("RIGHT");
     }
 
+    // this.scene.time.addEvent({
+    //   delay: 1000,
+    //   callback: () => {
+    //     this.shoot();
+    //   },
+    //   loop: true,
+    // });
     if (Phaser.Input.Keyboard.JustDown(this.SPACE)) {
       this.shoot();
     }
@@ -74,6 +82,10 @@ class Player extends Phaser.GameObjects.Rectangle {
         this.facing[key] = false;
       }
     }
+  }
+
+  dead() {
+    this.destroy();
   }
 }
 
