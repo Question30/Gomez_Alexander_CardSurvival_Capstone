@@ -1,28 +1,15 @@
-import React from "react";
 import Phaser from "phaser";
-import Game from "../Game/Scenes/game";
+import { useEffect } from "react";
 
-function GameContainer() {
-  const config = {
-    width: 1000,
-    height: 800,
-    scale: {
-      mode: Phaser.Scale.FIT,
-      autoCenter: Phaser.Scale.CENTER_BOTH,
-    },
-    autoRound: false,
-    parent: "game_container",
-    physics: {
-      default: "arcade",
-      arcade: {
-        gravity: { y: 0 },
-        debug: true,
-      },
-    },
-    scene: [Game],
-  };
+function GameContainer({ config }) {
+  useEffect(() => {
+    const game = new Phaser.Game(config);
 
-  const game = new Phaser.Game(config);
+    return () => {
+      game.destroy(true);
+    };
+  }, []);
+
   return (
     <div
       id="game_container"
