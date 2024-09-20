@@ -1,7 +1,8 @@
 import Shot from "./shot";
+import Phaser from "phaser";
 
 class Player extends Phaser.GameObjects.Rectangle {
-  constructor(scene, x, y, number) {
+  constructor(scene, x, y) {
     super(scene, x, y, 32, 32, 0x00ff00);
     this.setOrigin(0.5);
     this.scene.add.existing(this);
@@ -24,8 +25,16 @@ class Player extends Phaser.GameObjects.Rectangle {
       UP: false,
       DOWN: true,
     };
+
+    this.init();
   }
-  create() {}
+  init() {
+    this.timer = this.scene.time.addEvent({
+      callback: this.onTimerComplete,
+      callbackScope: this,
+      delay: 1000,
+    });
+  }
 
   update() {
     if (this.W.isDown) {
@@ -41,37 +50,25 @@ class Player extends Phaser.GameObjects.Rectangle {
       this.x += 1.5;
       this.setFacing("RIGHT");
     }
+  }
 
-    // this.scene.time.addEvent({
-    //   delay: 1000,
-    //   callback: () => {
-    //     this.shoot();
-    //   },
-    //   loop: true,
-    // });
-    if (Phaser.Input.Keyboard.JustDown(this.SPACE)) {
-      this.shoot();
-    }
+  onTimerComplete() {
+    this.shoot();
+    this.timer.reset({
+      callback: this.onTimerComplete,
+      callbackScope: this,
+      delay: 1000,
+    });
   }
 
   shoot() {
-    if (this.facing.DOWN) {
-      this.scene.shots.add(
-        new Shot(this.scene, this.x, this.y, this.name, 0, 100)
-      );
-    } else if (this.facing.UP) {
-      this.scene.shots.add(
-        new Shot(this.scene, this.x, this.y, this.name, 0, -100)
-      );
-    } else if (this.facing.RIGHT) {
-      this.scene.shots.add(
-        new Shot(this.scene, this.x, this.y, this.name, 100, 0)
-      );
-    } else if (this.facing.LEFT) {
-      this.scene.shots.add(
-        new Shot(this.scene, this.x, this.y, this.name, -100, 0)
-      );
-    }
+    const { mouseX, mouseY } = this.getMouseCoords();
+
+    this.shot = new Shot(this.scene, this.x, this.y, this.name, mouseX, mouseY);
+
+    this.scene.shots.add(this.shot);
+
+    this.scene.physics.moveTo(this.shot, mouseX, mouseY, 100);
   }
 
   setFacing(direction) {
@@ -86,6 +83,17 @@ class Player extends Phaser.GameObjects.Rectangle {
 
   dead() {
     this.destroy();
+  }
+
+  getMouseCoords() {
+    // Takes a Camera and updates this Pointer's worldX and worldY values so they are the result of a translation through the given Camera.
+    this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main);
+    const pointer = this.scene.input.activePointer;
+
+    return {
+      mouseX: pointer.worldX,
+      mouseY: pointer.worldY,
+    };
   }
 }
 

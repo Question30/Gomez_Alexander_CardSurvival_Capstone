@@ -1,5 +1,6 @@
 import Player from "../GameObjects/player";
 import EnemyGenerator from "../GameObjects/generateEnemies";
+import Phaser from "phaser";
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -87,6 +88,7 @@ export default class Game extends Phaser.Scene {
   }
 
   killPlayer(enemy, player) {
+    this.shots.destroy();
     player.dead();
   }
 }

@@ -1,12 +1,12 @@
+import Phaser from "phaser";
+
 class Shot extends Phaser.GameObjects.PointLight {
-  constructor(scene, x, y, playername, velocityX = 0, velocityY = 0) {
+  constructor(scene, x, y, playername) {
     super(scene, x, y, 0xffffff, 6, 0.4);
     this.playername = playername;
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
-    this.body.setVelocityX(velocityX);
-    this.body.setVelocityY(velocityY);
-    // this.body.setOffset(6, 9);
+    this.body.setOffset(6, 9);
     this.body.setCircle(6);
     this.body.setCollideWorldBounds(true);
     this.body.onWorldBounds = true;
