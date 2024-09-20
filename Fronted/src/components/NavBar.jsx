@@ -12,6 +12,7 @@ export default function NavBar({ links }) {
     }
   }, []);
 
+  console.log(user);
   const linkArray = () => {
     let linkArr = [...links];
     if (user) {
@@ -22,7 +23,11 @@ export default function NavBar({ links }) {
   };
   return (
     <nav className="bg-slate-800 flex justify-between items-center px-2.5 min-w-full">
-      <div>Logo</div>
+      {user ? (
+        <div className="text-slate-200">Welocime {user}</div>
+      ) : (
+        <div>Logo</div>
+      )}
       {linkArray().map((link, index) => (
         <NavItem key={index} link={link} setUser={setUser} />
       ))}
