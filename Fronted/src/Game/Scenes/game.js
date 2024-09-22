@@ -34,14 +34,9 @@ export default class Game extends Phaser.Scene {
     this.enemies.update();
     if (this.enemiesWaveGroup.getLength() === 0) {
       this.number = this.number + 1;
-      // this.clearEnemies();
       this.enemies = new EnemyGenerator(this);
     }
   }
-
-  // clearEnemies(){
-
-  // }
 
   addEnemies() {
     this.enemiesGroup = this.add.group();
@@ -107,6 +102,7 @@ export default class Game extends Phaser.Scene {
   killPlayer(enemy, player) {
     enemy.destroy();
     player.dead();
+    this.endScene();
   }
 
   endScene() {
@@ -124,7 +120,7 @@ export default class Game extends Phaser.Scene {
     this.scene.stop("game");
     const scene = this.number < 5 ? "transition" : "outro";
     this.scene.start(scene, {
-      next: "game",
+      next: "splash",
       name: "STAGE",
       number: this.number + 1,
     });

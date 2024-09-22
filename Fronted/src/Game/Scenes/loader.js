@@ -47,6 +47,9 @@ export default class Loader extends Phaser.Scene {
   //Function to load SpriteSheets
   loadSpriteSheets() {}
 
+  //To Load Fonts
+  loadFonts() {}
+
   //Set intial values to the registry
   setRegistry() {
     this.registry.set("score", 0);
@@ -62,5 +65,6 @@ export default class Loader extends Phaser.Scene {
       this.cameras.main.width / 2 + 4,
       20
     );
+    this.progressBar = this.add.graphics();
   }
 }
