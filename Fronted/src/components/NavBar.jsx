@@ -24,7 +24,7 @@ export default function NavBar({ links }) {
   return (
     <nav className="bg-slate-800 flex justify-between items-center px-2.5 min-w-full">
       {user ? (
-        <div className="text-slate-200">Welocime {user}</div>
+        <div className="text-slate-200">Welcome {user}</div>
       ) : (
         <div>Logo</div>
       )}

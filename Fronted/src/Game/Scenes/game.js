@@ -9,7 +9,9 @@ export default class Game extends Phaser.Scene {
     this.enemy = null;
   }
 
-  init() {}
+  init() {
+    this.number = 1;
+  }
 
   preload() {}
 
@@ -34,6 +36,7 @@ export default class Game extends Phaser.Scene {
 
   addEnemies() {
     this.enemiesGroup = this.add.group();
+    this.addEnemiesWaveGroup = this.add.group();
     this.enemies = new EnemyGenerator(this);
   }
 

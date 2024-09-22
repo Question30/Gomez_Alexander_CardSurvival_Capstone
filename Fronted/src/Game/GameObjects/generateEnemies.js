@@ -4,20 +4,31 @@ import Phaser from "phaser";
 class EnemyGenerator {
   constructor(scene) {
     this.scene = scene;
+    this.waveEnemies = [];
     this.generate();
+    this.activeWave = false;
+    this.waves = 0;
   }
 
   generate() {
+    console.log(this.baseNum);
+    let num = this.scene.number * 10;
+    console.log(num);
     this.wave();
   }
 
-  wave() {
-    Array(10)
+  wave(num = 10) {
+    Array(num)
       .fill()
       .forEach((_, i) => this.addToWave(i));
+    this.activeWave = true;
   }
 
   update() {
+    if (this.activeWave && this.checkIfWaveComplete()) {
+      this.activeWave = false;
+    }
+
     this.scene.enemiesGroup.children.entries.forEach((enemy) => {
       enemy.update();
     });
@@ -70,6 +81,27 @@ class EnemyGenerator {
           );
 
     return y;
+  }
+
+  //Stops the Generation of Enemies
+  stop() {
+    clearInterval(this.generationIntervalId);
+    this.scene.enemiesGroup.children.entries.forEach((enemy) => {
+      if (enemy === null || !enemy.active) return;
+      enemy.destroy();
+    });
+  }
+
+  //End the Scene
+  finishScene() {
+    this.scene.endScene();
+  }
+
+  //Check if the wave was completed
+  checkIfWaveComplete() {
+    const enemies = this.scene.enemiesGroup.children.entries;
+
+    return enemies.length === enemies.filter((enemy) => !enemy.active).length;
   }
 }
 
