@@ -56,12 +56,12 @@ class EnemyGenerator {
     let x =
       num < 1
         ? Phaser.Math.Between(
-            this.scene.center_width - 400,
-            this.scene.center_width - 100
+            this.scene.player.x - 400,
+            this.scene.player.x - 100
           )
         : Phaser.Math.Between(
-            this.scene.center_width + 100,
-            this.scene.center_width + 400
+            this.scene.player.x + 100,
+            this.scene.player.x + 400
           );
 
     return x;
@@ -72,12 +72,12 @@ class EnemyGenerator {
     let y =
       num < 1
         ? Phaser.Math.Between(
-            this.scene.center_height - 300,
-            this.scene.center_height - 100
+            this.scene.player.y - 300,
+            this.scene.player.y - 100
           )
         : Phaser.Math.Between(
-            this.scene.center_height + 100,
-            this.scene.center_height + 300
+            this.scene.player.y + 100,
+            this.scene.player.y + 300
           );
 
     return y;

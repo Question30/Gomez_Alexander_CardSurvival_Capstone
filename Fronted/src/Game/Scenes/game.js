@@ -11,11 +11,11 @@ export default class Game extends Phaser.Scene {
 
   init() {
     this.number = 1;
+    this.startTime = new Date();
   }
 
-  preload() {}
-
   create() {
+    this.duration = this.time * 1000;
     this.width = this.sys.game.config.width;
     this.height = this.sys.game.config.height;
     this.center_width = this.width / 2;
@@ -23,6 +23,22 @@ export default class Game extends Phaser.Scene {
 
     this.cameras.main.setBackgroundColor(0x87ceeb);
     this.player = new Player(this, this.center_width, this.center_height);
+    this.text = this.add.text(32, 32);
+
+    const timedEvent = this.time.addEvent({
+      delay: 1000,
+      repeat: -1,
+      callback: () => {
+        let elapsedTime = new Date() - this.startTime;
+        let calcdHour = Math.floor(elapsedTime / 1000 / 60 / 60);
+        let calcdMinutes = Math.floor(elapsedTime / 1000 / 60) - 60 * calcdHour;
+        let calcDseconds = Math.floor(elapsedTime / 1000) - 60 * calcdMinutes;
+        let hour = calcdHour < 10 ? "0" + calcdHour : calcdHour;
+        let minutes = calcdMinutes < 10 ? "0" + calcdMinutes : calcdMinutes;
+        let seconds = calcDseconds < 10 ? "0" + calcDseconds : calcDseconds;
+        this.text.setText("Time: " + hour + ":" + minutes + ":" + seconds);
+      },
+    });
 
     this.addEnemies();
     this.addShots();
