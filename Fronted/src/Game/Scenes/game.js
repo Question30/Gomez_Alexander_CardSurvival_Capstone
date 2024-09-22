@@ -12,6 +12,7 @@ export default class Game extends Phaser.Scene {
   init() {
     this.number = 1;
     this.startTime = new Date();
+    this.score = 0;
   }
 
   create() {
@@ -24,6 +25,11 @@ export default class Game extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(0x87ceeb);
     this.player = new Player(this, this.center_width, this.center_height);
     this.text = this.add.text(32, 32);
+    this.scoreText = this.add.text(
+      this.center_width,
+      32,
+      "Score: " + this.score
+    );
 
     const timedEvent = this.time.addEvent({
       delay: 1000,
@@ -113,6 +119,12 @@ export default class Game extends Phaser.Scene {
   destroyEnemy(shot, enemy) {
     enemy.dead();
     shot.destroy();
+    this.updateScore();
+  }
+
+  updateScore() {
+    this.score += 100;
+    this.scoreText.setText("Score: " + this.score);
   }
 
   killPlayer(enemy, player) {
