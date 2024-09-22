@@ -1,6 +1,7 @@
 import Player from "../GameObjects/player";
 import EnemyGenerator from "../GameObjects/generateEnemies";
 import Phaser from "phaser";
+import BossOne from "../GameObjects/bossOne";
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -31,6 +32,8 @@ export default class Game extends Phaser.Scene {
       "Score: " + this.score
     );
 
+    this.waveText = this.add.text(this.width - 200, 32, "Wave: " + this.number);
+
     const timedEvent = this.time.addEvent({
       delay: 1000,
       repeat: -1,
@@ -55,9 +58,14 @@ export default class Game extends Phaser.Scene {
     this.player.update();
     this.enemies.update();
     if (this.enemiesWaveGroup.getLength() === 0) {
-      this.number = this.number + 1;
+      this.number += 1;
       this.enemies = new EnemyGenerator(this);
+      this.updateWave();
     }
+  }
+
+  updateWave() {
+    this.waveText.setText("Wave: " + this.number);
   }
 
   addEnemies() {
@@ -117,13 +125,23 @@ export default class Game extends Phaser.Scene {
   }
 
   destroyEnemy(shot, enemy) {
-    enemy.dead();
-    shot.destroy();
-    this.updateScore();
+    if (enemy.name === "bossOne") {
+      enemy.takeDamage(10);
+      console.log(enemy.health);
+      if (enemy.health < 1) {
+        enemy.destroy();
+        this.updateScore(1000);
+      }
+      shot.destroy();
+    } else {
+      enemy.dead();
+      shot.destroy();
+      this.updateScore(100);
+    }
   }
 
-  updateScore() {
-    this.score += 100;
+  updateScore(num) {
+    this.score += num;
     this.scoreText.setText("Score: " + this.score);
   }
 

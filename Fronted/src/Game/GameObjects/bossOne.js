@@ -1,15 +1,16 @@
 import Phaser from "phaser";
 
-class Enemy extends Phaser.GameObjects.Rectangle {
+export default class BossOne extends Phaser.GameObjects.Rectangle {
   constructor(scene, x, y) {
-    super(scene, x, y, 32, 32, 0xff00ff);
+    super(scene, x, y, 64, 64, 0x00ffff);
     this.setOrigin(0.5);
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
     this.setScale(0.5);
     this.body.setCollideWorldBounds(true);
     this.isDead = false;
-    this.name = "baseEnemy";
+    this.health = 100;
+    this.name = "bossOne";
   }
 
   update() {
@@ -27,10 +28,17 @@ class Enemy extends Phaser.GameObjects.Rectangle {
     );
   }
 
+  takeDamage(num) {
+    if (this.health > 0 && this.isDead == false) {
+      let dmg = (this.health -= num);
+      if (dmg < 0) {
+        this.dead();
+      }
+    }
+  }
+
   dead() {
     this.isDead = true;
     this.destroy();
   }
 }
-
-export default Enemy;

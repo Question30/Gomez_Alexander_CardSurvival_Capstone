@@ -1,3 +1,4 @@
+import BossOne from "./bossOne";
 import Enemy from "./enemy";
 import Phaser from "phaser";
 
@@ -11,10 +12,12 @@ class EnemyGenerator {
   }
 
   generate() {
-    console.log(this.baseNum);
-    let num = this.scene.number * 10;
-    console.log(num);
-    this.wave(num);
+    if (this.scene.number === 3) {
+      this.spawnBossOne();
+    } else {
+      let num = this.scene.number * 10;
+      this.wave(num);
+    }
   }
 
   wave(num = 10) {
@@ -32,6 +35,11 @@ class EnemyGenerator {
     this.scene.enemiesWaveGroup.children.entries.forEach((enemy) => {
       enemy.update();
     });
+  }
+
+  spawnBossOne() {
+    this.bossOne = new BossOne(this.scene, this.getX(), this.getY());
+    this.scene.enemiesWaveGroup.add(this.bossOne);
   }
 
   addToWave(i) {
