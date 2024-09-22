@@ -14,6 +14,10 @@ class EnemyGenerator {
   generate() {
     if (this.scene.number === 3) {
       this.spawnBossOne();
+    } else if (this.scene.number === 7) {
+      this.spawnBossOne();
+    } else if (this.scene.number === 10) {
+      this.spawnBossOne();
     } else {
       let num = this.scene.number * 10;
       this.wave(num);

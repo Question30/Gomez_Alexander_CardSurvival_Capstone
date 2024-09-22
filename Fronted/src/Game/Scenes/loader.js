@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import playerPng from "../../assets/images/player.png";
 
 export default class Loader extends Phaser.Scene {
   constructor() {
@@ -9,6 +10,7 @@ export default class Loader extends Phaser.Scene {
   preload() {
     this.createBars();
     this.setLoadEvents();
+    this.loadSpriteSheets();
     this.setRegistry();
   }
 
@@ -45,7 +47,12 @@ export default class Loader extends Phaser.Scene {
   loadAudios() {}
 
   //Function to load SpriteSheets
-  loadSpriteSheets() {}
+  loadSpriteSheets() {
+    this.load.spritesheet("player", playerPng, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+  }
 
   //To Load Fonts
   loadFonts() {}

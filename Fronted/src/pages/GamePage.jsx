@@ -6,6 +6,7 @@ import Loader from "../Game/Scenes/loader";
 import Splash from "../Game/Scenes/splash";
 import Transition from "../Game/Scenes/transition";
 import Phaser from "phaser";
+import Outro from "../Game/Scenes/outro";
 
 function GamePage() {
   const config = {
@@ -24,7 +25,7 @@ function GamePage() {
         debug: true,
       },
     },
-    scene: [Loader, Splash, Transition, Game],
+    scene: [Loader, Splash, Transition, Game, Outro],
   };
   return (
     <div>

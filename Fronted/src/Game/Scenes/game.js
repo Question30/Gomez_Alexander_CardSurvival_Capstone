@@ -24,8 +24,8 @@ export default class Game extends Phaser.Scene {
     this.center_height = this.height / 2;
 
     this.cameras.main.setBackgroundColor(0x87ceeb);
-    this.player = new Player(this, this.center_width, this.center_height);
-    this.text = this.add.text(32, 32);
+    this.player = new Player(this, this.center_width - 200, this.center_height);
+    this.text = this.add.text(this.center_width - 400, 32);
     this.scoreText = this.add.text(
       this.center_width,
       32,
@@ -61,6 +61,10 @@ export default class Game extends Phaser.Scene {
       this.number += 1;
       this.enemies = new EnemyGenerator(this);
       this.updateWave();
+    }
+
+    if (this.number > 10) {
+      this.endScene();
     }
   }
 
@@ -164,11 +168,11 @@ export default class Game extends Phaser.Scene {
 
   finishScene() {
     this.scene.stop("game");
-    const scene = this.number < 5 ? "transition" : "outro";
-    this.scene.start(scene, {
-      next: "splash",
+    const scene = this.number < 2 ? "transition" : "outro";
+    this.scene.start("outro", {
+      next: "game",
       name: "STAGE",
-      number: this.number + 1,
+      number: 1,
     });
   }
 }
