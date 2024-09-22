@@ -32,11 +32,20 @@ export default class Game extends Phaser.Scene {
   update() {
     this.player.update();
     this.enemies.update();
+    if (this.enemiesWaveGroup.getLength() === 0) {
+      this.number = this.number + 1;
+      // this.clearEnemies();
+      this.enemies = new EnemyGenerator(this);
+    }
   }
+
+  // clearEnemies(){
+
+  // }
 
   addEnemies() {
     this.enemiesGroup = this.add.group();
-    this.addEnemiesWaveGroup = this.add.group();
+    this.enemiesWaveGroup = this.add.group();
     this.enemies = new EnemyGenerator(this);
   }
 
@@ -46,7 +55,7 @@ export default class Game extends Phaser.Scene {
 
   addColliders() {
     this.physics.add.collider(
-      this.enemiesGroup,
+      this.enemiesWaveGroup,
       this.player,
       this.killPlayer,
       () => {
@@ -57,7 +66,7 @@ export default class Game extends Phaser.Scene {
 
     this.physics.add.collider(
       this.shots,
-      this.enemiesGroup,
+      this.enemiesWaveGroup,
       this.destroyEnemy,
       () => {
         true;
@@ -67,7 +76,7 @@ export default class Game extends Phaser.Scene {
 
     this.physics.add.overlap(
       this.shots,
-      this.enemiesGroup,
+      this.enemiesWaveGroup,
       this.destroyEnemy,
       () => {
         return true;
@@ -85,13 +94,39 @@ export default class Game extends Phaser.Scene {
     }
   }
 
+  destroyWaveEnemy(shot, enemy) {
+    this.lastDestroyedWaveEnemy = { x: enemy.x, y: enemy.y };
+    this.destroyEnemy(shot, enemy);
+  }
+
   destroyEnemy(shot, enemy) {
     enemy.dead();
     shot.destroy();
   }
 
   killPlayer(enemy, player) {
-    this.shots.destroy();
+    enemy.destroy();
     player.dead();
+  }
+
+  endScene() {
+    this.time.delayedCall(
+      2000,
+      () => {
+        this.finishScene();
+      },
+      null,
+      this
+    );
+  }
+
+  finishScene() {
+    this.scene.stop("game");
+    const scene = this.number < 5 ? "transition" : "outro";
+    this.scene.start(scene, {
+      next: "game",
+      name: "STAGE",
+      number: this.number + 1,
+    });
   }
 }

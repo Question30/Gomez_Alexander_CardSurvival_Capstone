@@ -25,10 +25,11 @@ class Player extends Phaser.GameObjects.Rectangle {
       UP: false,
       DOWN: true,
     };
-
+    this.alive = false;
     this.init();
   }
   init() {
+    this.alive = true;
     this.timer = this.scene.time.addEvent({
       callback: this.onTimerComplete,
       callbackScope: this,
@@ -53,12 +54,14 @@ class Player extends Phaser.GameObjects.Rectangle {
   }
 
   onTimerComplete() {
-    this.shoot();
-    this.timer.reset({
-      callback: this.onTimerComplete,
-      callbackScope: this,
-      delay: 1000,
-    });
+    if (this.alive) {
+      this.shoot();
+      this.timer.reset({
+        callback: this.onTimerComplete,
+        callbackScope: this,
+        delay: 1000,
+      });
+    }
   }
 
   shoot() {
@@ -82,18 +85,22 @@ class Player extends Phaser.GameObjects.Rectangle {
   }
 
   dead() {
+    this.shot.destroy();
     this.destroy();
+    this.alive = false;
   }
 
   getMouseCoords() {
-    // Takes a Camera and updates this Pointer's worldX and worldY values so they are the result of a translation through the given Camera.
-    this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main);
-    const pointer = this.scene.input.activePointer;
+    if (this.alive) {
+      this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main);
+      const pointer = this.scene.input.activePointer;
 
-    return {
-      mouseX: pointer.worldX,
-      mouseY: pointer.worldY,
-    };
+      return {
+        mouseX: pointer.worldX,
+        mouseY: pointer.worldY,
+      };
+    }
+    // Takes a Camera and updates this Pointer's worldX and worldY values so they are the result of a translation through the given Camera.
   }
 }
 

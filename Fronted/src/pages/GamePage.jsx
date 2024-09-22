@@ -2,6 +2,9 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import GameContainer from "../components/GameContainer";
 import Game from "../Game/Scenes/game";
+import Loader from "../Game/Scenes/loader";
+import Splash from "../Game/Scenes/splash";
+import Transition from "../Game/Scenes/transition";
 import Phaser from "phaser";
 
 function GamePage() {
@@ -21,7 +24,7 @@ function GamePage() {
         debug: true,
       },
     },
-    scene: [Game],
+    scene: [Loader, Splash, Transition, Game],
   };
   return (
     <div>

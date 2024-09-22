@@ -14,7 +14,7 @@ class EnemyGenerator {
     console.log(this.baseNum);
     let num = this.scene.number * 10;
     console.log(num);
-    this.wave();
+    this.wave(num);
   }
 
   wave(num = 10) {
@@ -29,7 +29,7 @@ class EnemyGenerator {
       this.activeWave = false;
     }
 
-    this.scene.enemiesGroup.children.entries.forEach((enemy) => {
+    this.scene.enemiesWaveGroup.children.entries.forEach((enemy) => {
       enemy.update();
     });
   }
@@ -47,7 +47,7 @@ class EnemyGenerator {
       delay: i * 100,
     });
     this;
-    this.scene.enemiesGroup.add(enemy);
+    this.scene.enemiesWaveGroup.add(enemy);
   }
 
   getX() {
