@@ -40,7 +40,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
   addAnimations() {
     this.scene.anims.create({
-      key: "down",
+      key: "shoot",
       frames: this.anims.generateFrameNumbers(this.name, { start: 0, end: 1 }),
       frameRate: 2,
       repeat: -1,
@@ -57,7 +57,6 @@ class Player extends Phaser.GameObjects.Sprite {
     } else if (this.S.isDown) {
       this.y += 1.5;
       this.setFacing("DOWN");
-      this.anims.play("down", true);
     } else if (this.D.isDown) {
       this.x += 1.5;
       this.setFacing("RIGHT");
@@ -83,6 +82,7 @@ class Player extends Phaser.GameObjects.Sprite {
     this.scene.shots.add(this.shot);
 
     this.scene.physics.moveTo(this.shot, mouseX, mouseY, 100);
+    this.anims.play("shoot", true);
   }
 
   setFacing(direction) {

@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 import playerPng from "../../assets/images/player.png";
+import enemyPng from "../../assets/images/enemy.png";
+import BossOnePng from "../../assets/images/bossOne.png";
 
 export default class Loader extends Phaser.Scene {
   constructor() {
@@ -49,6 +51,14 @@ export default class Loader extends Phaser.Scene {
   //Function to load SpriteSheets
   loadSpriteSheets() {
     this.load.spritesheet("player", playerPng, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet("enemy", enemyPng, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet("bossOne", BossOnePng, {
       frameWidth: 32,
       frameHeight: 32,
     });

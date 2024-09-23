@@ -12,7 +12,7 @@ class EnemyGenerator {
   }
 
   generate() {
-    if (this.scene.number === 3) {
+    if (this.scene.number === 1) {
       this.spawnBossOne();
     } else if (this.scene.number === 7) {
       this.spawnBossOne();
@@ -36,9 +36,16 @@ class EnemyGenerator {
       this.activeWave = false;
     }
 
-    this.scene.enemiesWaveGroup.children.entries.forEach((enemy) => {
-      enemy.update();
-    });
+    if (
+      this.scene.enemiesWaveGroup.length == 1 &&
+      this.scene.enemiesWaveGroup[0].name == "bossOne"
+    ) {
+      this.bossOne.update();
+    } else {
+      this.scene.enemiesWaveGroup.children.entries.forEach((enemy) => {
+        enemy.update();
+      });
+    }
   }
 
   spawnBossOne() {

@@ -131,9 +131,9 @@ export default class Game extends Phaser.Scene {
   destroyEnemy(shot, enemy) {
     if (enemy.name === "bossOne") {
       enemy.takeDamage(10);
-      console.log(enemy.health);
       if (enemy.health < 1) {
-        enemy.destroy();
+        console.log(enemy.health);
+        enemy.dead();
         this.updateScore(1000);
       }
       shot.destroy();
