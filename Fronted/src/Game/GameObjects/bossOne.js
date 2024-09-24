@@ -10,6 +10,7 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
     this.setScale(2);
     this.body.setCollideWorldBounds(true);
     this.isDead = false;
+    this.startHealth = 500;
     this.health = 500;
     this.name = "bossOne";
     this.init();
@@ -23,6 +24,8 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
       delay: 5000,
     });
     this.addAnimations();
+    this.createHealthBar();
+    this.updateHealthBar();
   }
 
   update() {
@@ -147,6 +150,7 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
       if (dmg < 0) {
         this.dead();
       }
+      this.updateHealthBar();
     }
   }
 
@@ -154,5 +158,28 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
     console.log("dead ran");
     this.isDead = true;
     this.destroy();
+  }
+
+  createHealthBar() {
+    this.loadBar = this.scene.add.graphics();
+    this.loadBar.fillStyle(0x0088aa, 1);
+    this.loadBar.fillRect(
+      this.scene.cameras.main.width / 4,
+      64,
+      this.scene.cameras.main.width / 2,
+      20
+    );
+    this.progressBar = this.scene.add.graphics();
+  }
+
+  updateHealthBar() {
+    this.progressBar.clear();
+    this.progressBar.fillStyle(0xd40000, 1);
+    this.progressBar.fillRect(
+      this.scene.cameras.main.width / 4,
+      64,
+      (this.scene.cameras.main.width / 2) * (this.health / this.startHealth),
+      20
+    );
   }
 }
