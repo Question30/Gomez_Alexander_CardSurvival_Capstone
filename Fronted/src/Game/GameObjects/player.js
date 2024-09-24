@@ -27,13 +27,16 @@ class Player extends Phaser.GameObjects.Sprite {
     };
     this.alive = false;
     this.init();
+    this.attackSpd = 1000;
+    this.moveSpd = 1.5;
+    this.bullets = 1;
   }
   init() {
     this.alive = true;
     this.timer = this.scene.time.addEvent({
       callback: this.onTimerComplete,
       callbackScope: this,
-      delay: 1000,
+      delay: this.attackSpd,
     });
     this.addAnimations();
   }
@@ -49,16 +52,16 @@ class Player extends Phaser.GameObjects.Sprite {
 
   update() {
     if (this.W.isDown) {
-      this.y -= 1.5;
+      this.y -= this.moveSpd;
       this.setFacing("UP");
     } else if (this.A.isDown) {
-      this.x -= 1.5;
+      this.x -= this.moveSpd;
       this.setFacing("LEFT");
     } else if (this.S.isDown) {
-      this.y += 1.5;
+      this.y += this.moveSpd;
       this.setFacing("DOWN");
     } else if (this.D.isDown) {
-      this.x += 1.5;
+      this.x += this.moveSpd;
       this.setFacing("RIGHT");
     }
   }
@@ -69,7 +72,7 @@ class Player extends Phaser.GameObjects.Sprite {
       this.timer.reset({
         callback: this.onTimerComplete,
         callbackScope: this,
-        delay: 1000,
+        delay: this.attackSpd,
       });
     }
   }
@@ -77,11 +80,57 @@ class Player extends Phaser.GameObjects.Sprite {
   shoot() {
     const { mouseX, mouseY } = this.getMouseCoords();
 
-    this.shot = new Shot(this.scene, this.x, this.y, this.name, mouseX, mouseY);
+    if (this.bullets == 1) {
+      const shot = new Shot(this.scene, this.x, this.y, this.name);
 
-    this.scene.shots.add(this.shot);
+      this.scene.shots.add(shot);
 
-    this.scene.physics.moveTo(this.shot, mouseX, mouseY, 100);
+      this.scene.physics.moveTo(shot, mouseX, mouseY, 120);
+    } else if (this.bullets == 2) {
+      const shot1 = new Shot(this.scene, this.x, this.y, this.name);
+      const shot2 = new Shot(this.scene, shot1.x + 6, shot1.y + 6, this.name);
+      this.scene.shots.add(shot1);
+
+      this.scene.physics.moveTo(shot1, mouseX, mouseY, 120);
+      this.scene.shots.add(shot2);
+
+      this.scene.physics.moveTo(shot2, mouseX + 10, mouseY + 10, 120);
+    } else if (this.bullets == 3) {
+      const shot1 = new Shot(this.scene, this.x, this.y, this.name);
+      const shot2 = new Shot(this.scene, shot1.x + 6, shot1.y + 6, this.name);
+      const shot3 = new Shot(this.scene, shot1.x - 6, shot1.y - 6, this.name);
+      this.scene.shots.add(shot1);
+
+      this.scene.physics.moveTo(shot1, mouseX, mouseY, 120);
+      this.scene.shots.add(shot2);
+
+      this.scene.physics.moveTo(shot2, mouseX + 30, mouseY + 30, 120);
+      this.scene.shots.add(shot3);
+
+      this.scene.physics.moveTo(shot3, mouseX - 30, mouseY - 30, 120);
+    } else {
+      const shot1 = new Shot(this.scene, this.x, this.y, this.name);
+      const shot2 = new Shot(this.scene, shot1.x + 6, shot1.y + 6, this.name);
+      const shot3 = new Shot(this.scene, shot1.x - 6, shot1.y - 6, this.name);
+      const shot4 = new Shot(this.scene, shot3.x + 6, shot3.y + 6, this.name);
+      const shot5 = new Shot(this.scene, shot2.x - 6, shot2.y - 6, this.name);
+      this.scene.shots.add(shot1);
+
+      this.scene.physics.moveTo(shot1, mouseX, mouseY, 120);
+      this.scene.shots.add(shot2);
+
+      this.scene.physics.moveTo(shot2, mouseX + 30, mouseY + 30, 120);
+      this.scene.shots.add(shot3);
+
+      this.scene.physics.moveTo(shot3, mouseX - 30, mouseY - 30, 120);
+      this.scene.shots.add(shot4);
+
+      this.scene.physics.moveTo(shot4, mouseX - 60, mouseY - 60, 120);
+      this.scene.shots.add(shot5);
+
+      this.scene.physics.moveTo(shot5, mouseX + 60, mouseY + 60, 120);
+    }
+
     this.anims.play("shoot", true);
   }
 
@@ -96,7 +145,6 @@ class Player extends Phaser.GameObjects.Sprite {
   }
 
   dead() {
-    this.shot.destroy();
     this.destroy();
     this.alive = false;
   }
@@ -111,7 +159,6 @@ class Player extends Phaser.GameObjects.Sprite {
         mouseY: pointer.worldY,
       };
     }
-    // Takes a Camera and updates this Pointer's worldX and worldY values so they are the result of a translation through the given Camera.
   }
 }
 

@@ -13,7 +13,7 @@ function GameContainer({ config }) {
   return (
     <div
       id="game_container"
-      // className="border my-20 mx-auto bg-gray-500 w-10/12 min-h-[700px]"
+      // className="border my-20 mx-auto bg-gray-500 w-4/5 "
     ></div>
   );
 }

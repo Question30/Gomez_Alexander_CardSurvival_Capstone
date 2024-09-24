@@ -6,7 +6,6 @@ class Shot extends Phaser.GameObjects.PointLight {
     this.playername = playername;
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
-    this.body.setOffset(6, 9);
     this.body.setCircle(6);
     this.body.setCollideWorldBounds(true);
     this.body.onWorldBounds = true;

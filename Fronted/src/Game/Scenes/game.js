@@ -1,19 +1,21 @@
 import Player from "../GameObjects/player";
 import EnemyGenerator from "../GameObjects/generateEnemies";
 import Phaser from "phaser";
-import BossOne from "../GameObjects/bossOne";
+import PowerUp from "../GameObjects/powerUp";
 
 export default class Game extends Phaser.Scene {
   constructor() {
     super({ key: "game" });
     this.player = null;
     this.enemy = null;
+    this.init();
   }
 
   init() {
     this.number = 1;
     this.startTime = new Date();
     this.score = 0;
+    this.powerUp = null;
   }
 
   create() {
@@ -51,6 +53,7 @@ export default class Game extends Phaser.Scene {
 
     this.addEnemies();
     this.addShots();
+    this.addPowerUps();
     this.addColliders();
   }
 
@@ -58,14 +61,28 @@ export default class Game extends Phaser.Scene {
     this.player.update();
     this.enemies.update();
     if (this.enemiesWaveGroup.getLength() === 0) {
-      this.number += 1;
-      this.enemies = new EnemyGenerator(this);
-      this.updateWave();
+      this.newWave();
     }
 
     if (this.number > 10) {
       this.endScene();
     }
+  }
+  newWave() {
+    const powerUpName =
+      this.availablePowerups[
+        Phaser.Math.Between(0, this.availablePowerups.length - 1)
+      ];
+    this.powerUp = new PowerUp(
+      this,
+      this.center_width,
+      this.center_height,
+      powerUpName.value,
+      powerUpName.color
+    );
+    this.number += 1;
+    this.enemies = new EnemyGenerator(this);
+    this.updateWave();
   }
 
   updateWave() {
@@ -75,6 +92,7 @@ export default class Game extends Phaser.Scene {
   addEnemies() {
     this.enemiesGroup = this.add.group();
     this.enemiesWaveGroup = this.add.group();
+    this.enemiesShotGroup = this.add.group();
     this.enemies = new EnemyGenerator(this);
   }
 
@@ -82,7 +100,17 @@ export default class Game extends Phaser.Scene {
     this.shots = this.add.group();
   }
 
+  addPowerUps() {
+    this.powerUps = this.add.group();
+    this.availablePowerups = [
+      { value: "moveSpd", color: 0x00ff00 },
+      { value: "attackSpd", color: 0xffff00 },
+      { value: "extraBullet", color: 0xaaff00 },
+    ];
+  }
+
   addColliders() {
+    console.log(this.powerUp);
     this.physics.add.collider(
       this.enemiesWaveGroup,
       this.player,
@@ -103,12 +131,42 @@ export default class Game extends Phaser.Scene {
       this
     );
 
+    this.physics.add.collider(
+      this.enemiesShotGroup,
+      this.player,
+      this.killPlayerShot,
+      () => {
+        true;
+      },
+      this
+    );
+
+    this.physics.add.overlap(
+      this.enemiesShotGroup,
+      this.shots,
+      this.destroyShot,
+      () => {
+        true;
+      },
+      this
+    );
+
+    this.physics.add.collider(
+      this.player,
+      this.powerUps,
+      this.pickUpPowerUp,
+      () => {
+        true;
+      },
+      this
+    );
+
     this.physics.add.overlap(
       this.shots,
       this.enemiesWaveGroup,
       this.destroyEnemy,
       () => {
-        return true;
+        true;
       },
       this
     );
@@ -118,9 +176,21 @@ export default class Game extends Phaser.Scene {
 
   onWorldBounds(body, t) {
     const name = body.gameObject.name.toString();
-    if (["foeshot", "shot"].includes(name)) {
+    if (["foeshot", "shot", "bossOneShot"].includes(name)) {
       body.gameObject.destroy();
     }
+  }
+
+  pickUpPowerUp(player, powerUp) {
+    if (powerUp.name === "attackSpd") {
+      player.attackSpd -= 200;
+    } else if (powerUp.name == "moveSpd") {
+      player.moveSpd += 0.5;
+    } else if (powerUp.name == "extraBullet") {
+      player.bullets++;
+    }
+
+    powerUp.destroy();
   }
 
   destroyWaveEnemy(shot, enemy) {
@@ -132,7 +202,6 @@ export default class Game extends Phaser.Scene {
     if (enemy.name === "bossOne") {
       enemy.takeDamage(10);
       if (enemy.health < 1) {
-        console.log(enemy.health);
         enemy.dead();
         this.updateScore(1000);
       }
@@ -144,13 +213,23 @@ export default class Game extends Phaser.Scene {
     }
   }
 
+  destroyShot(enemyShot, shot) {
+    shot.destroy();
+  }
+
   updateScore(num) {
     this.score += num;
     this.scoreText.setText("Score: " + this.score);
   }
 
+  killPlayerShot(shot, player) {
+    shot.dead();
+    player.dead();
+    this.endScene();
+  }
+
   killPlayer(enemy, player) {
-    enemy.destroy();
+    enemy.dead();
     player.dead();
     this.endScene();
   }

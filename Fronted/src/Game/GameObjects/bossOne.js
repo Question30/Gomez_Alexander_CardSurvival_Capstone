@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import BossOneShot from "./BossOneShot";
 
 export default class BossOne extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, name = "bossOne") {
@@ -9,7 +10,7 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
     this.setScale(2);
     this.body.setCollideWorldBounds(true);
     this.isDead = false;
-    this.health = 100;
+    this.health = 500;
     this.name = "bossOne";
     this.init();
   }
@@ -42,25 +43,44 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
   }
 
   sleep() {
-    this.body.reset(this.x, this.y);
-    this.anims.play("sleep", true);
-    this.attacking = true;
-    this.timer.reset({
-      callback: this.onTimerComplete,
-      callbackScope: this,
-      delay: 10000,
-    });
+    if (this.isDead == false) {
+      this.body.reset(this.x, this.y);
+      this.body.isStatic = true;
+      this.anims.play("sleep", true);
+      this.attacking = true;
+      this.timer.reset({
+        callback: this.onTimerComplete,
+        callbackScope: this,
+        delay: 10000,
+      });
+    }
+  }
+
+  dash() {
+    if (this.isDead == false) {
+      this.scene.physics.moveTo(
+        this,
+        this.scene.player.x,
+        this.scene.player.y,
+        300
+      );
+    }
   }
 
   attack() {
-    this.body.reset(this.x, this.y);
-    this.anims.play("charge", true);
-    this.attacking = true;
-    this.timer.reset({
-      callback: this.onTimerComplete,
-      callbackScope: this,
-      delay: 10000,
-    });
+    if (this.isDead == false) {
+      this.body.reset(this.x, this.y);
+      this.anims.play("charge", true);
+      this.attacking = true;
+      this.shot = new BossOneShot(this.scene, this.x, this.y - 32);
+      this.scene.enemiesShotGroup.add(this.shot);
+
+      this.timer.reset({
+        callback: this.onTimerComplete,
+        callbackScope: this,
+        delay: 10000,
+      });
+    }
   }
 
   addAnimations() {
@@ -93,9 +113,21 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
   }
 
   animationComplete(animation, frame) {
-    if (animation.key === "charge" || animation.key === "sleep") {
+    if (animation.key === "charge") {
       this.anims.play("moveBoss", true);
       this.attacking = false;
+      this.scene.physics.moveTo(
+        this.shot,
+        this.scene.player.x,
+        this.scene.player.y,
+        200
+      );
+    } else if (animation.key === "sleep") {
+      this.dash();
+      this.anims.play("moveBoss", true);
+      this.scene.time.delayedCall(1000, () => {
+        this.attacking = false;
+      });
     }
   }
 
