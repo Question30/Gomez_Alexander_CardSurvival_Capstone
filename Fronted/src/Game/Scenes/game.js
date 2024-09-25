@@ -124,7 +124,7 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(
       this.shots,
       this.enemiesWaveGroup,
-      this.destroyEnemy,
+      this.destroyWaveEnemy,
       () => {
         true;
       },
@@ -199,7 +199,7 @@ export default class Game extends Phaser.Scene {
   }
 
   destroyEnemy(shot, enemy) {
-    if (enemy.name === "bossOne") {
+    if (enemy.name.slice(0, 4) === "boss") {
       enemy.takeDamage(10);
       if (enemy.health < 1) {
         enemy.dead();

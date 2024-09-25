@@ -1,4 +1,6 @@
 import BossOne from "./bossOne";
+import BossThree from "./bossThree";
+import BossTwo from "./bossTwo";
 import Enemy from "./enemy";
 import Phaser from "phaser";
 
@@ -12,8 +14,8 @@ class EnemyGenerator {
   }
 
   generate() {
-    if (this.scene.number === 3) {
-      this.spawnBossOne();
+    if (this.scene.number === 1) {
+      this.spawnBossTwo();
     } else if (this.scene.number === 7) {
       this.spawnBossOne();
     } else if (this.scene.number === 10) {
@@ -51,6 +53,15 @@ class EnemyGenerator {
   spawnBossOne() {
     this.bossOne = new BossOne(this.scene, this.getX(), this.getY());
     this.scene.enemiesWaveGroup.add(this.bossOne);
+  }
+
+  spawnBossTwo() {
+    this.bossTwo = new BossTwo(this.scene, this.getX(), this.getY());
+    this.scene.enemiesWaveGroup.add(this.bossTwo);
+  }
+  spawnBossThree() {
+    this.bossThree = new BossThree(this.scene, this.getX(), this.getY());
+    this.scene.enemiesWaveGroup.add(this.bossThree);
   }
 
   addToWave(i) {

@@ -47,8 +47,6 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
 
   sleep() {
     if (this.isDead == false) {
-      this.body.reset(this.x, this.y);
-      this.body.isStatic = true;
       this.anims.play("sleep", true);
       this.attacking = true;
       this.timer.reset({
@@ -72,7 +70,7 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
 
   attack() {
     if (this.isDead == false) {
-      this.body.reset(this.x, this.y);
+      // this.body.reset(this.x, this.y);
       this.anims.play("charge", true);
       this.attacking = true;
       this.shot = new BossOneShot(this.scene, this.x, this.y - 32);
@@ -119,6 +117,7 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
     if (animation.key === "charge") {
       this.anims.play("moveBoss", true);
       this.attacking = false;
+      this.body.setImmovable(false);
       this.scene.physics.moveTo(
         this.shot,
         this.scene.player.x,
@@ -130,12 +129,16 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
       this.anims.play("moveBoss", true);
       this.scene.time.delayedCall(1000, () => {
         this.attacking = false;
+        this.body.setImmovable(false);
       });
     }
   }
 
   onTimerComplete() {
     if (this.isDead == false) {
+      this.attacking = true;
+      this.body.reset(this.x, this.y);
+      this.body.setImmovable(true);
       if (Phaser.Math.Between(1, 6) > 5) {
         this.sleep();
       } else {
@@ -155,8 +158,9 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
   }
 
   dead() {
-    console.log("dead ran");
     this.isDead = true;
+    this.progressBar.destroy();
+    this.loadBar.destroy();
     this.destroy();
   }
 

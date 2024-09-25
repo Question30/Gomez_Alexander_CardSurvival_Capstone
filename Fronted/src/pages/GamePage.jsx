@@ -22,7 +22,7 @@ function GamePage() {
       default: "arcade",
       arcade: {
         gravity: { y: 0 },
-        debug: false,
+        debug: true,
       },
     },
     scene: [Loader, Splash, Transition, Game, Outro],
