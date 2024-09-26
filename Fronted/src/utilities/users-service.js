@@ -4,9 +4,6 @@ export async function signUp(userData) {
   const token = await usersApi.signUp(userData);
 
   localStorage.setItem("CSGToken", token.token);
-  console.log(localStorage.getItem("CSGToken"));
-  console.log(token);
-  console.log(getUser());
 }
 
 export async function login(credentials) {
@@ -15,6 +12,17 @@ export async function login(credentials) {
   localStorage.setItem("CSGToken", token.token);
 
   return getUser();
+}
+
+export async function addScore(score) {
+  const token = getToken();
+  if (token) {
+    const userName = getUser();
+    await usersApi.addScore(score, userName);
+    return "Score Added";
+  }
+
+  return "Score not Added";
 }
 
 export function getUser() {

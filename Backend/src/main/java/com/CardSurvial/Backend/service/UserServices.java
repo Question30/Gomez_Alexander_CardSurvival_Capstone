@@ -1,15 +1,11 @@
 package com.CardSurvial.Backend.service;
 
-import com.CardSurvial.Backend.common.UserInfoDetails;
 import com.CardSurvial.Backend.model.Scores;
 import com.CardSurvial.Backend.model.User;
 import com.CardSurvial.Backend.repository.ScoresRepository;
 import com.CardSurvial.Backend.repository.UserRepository;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

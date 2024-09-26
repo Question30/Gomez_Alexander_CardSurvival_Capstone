@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -21,6 +20,10 @@ public class Scores {
     private Integer score;
 //   hh:mm:ss
     private LocalTime time;
+    @Column(nullable = false)
+    private String username;
+    @Column(nullable = false)
+    private boolean complete;
 
     @Override
     public boolean equals(Object o) {
