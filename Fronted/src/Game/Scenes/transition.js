@@ -17,7 +17,7 @@ export default class Transition extends Phaser.Scene {
     this.center_width = this.width / 2;
     this.center_height = this.height / 2;
 
-    this.time.delayedCall(2000, () => this.loadNext(), null, this);
+    this.time.delayedCall(1000, () => this.loadNext(), null, this);
   }
 
   loadNext() {

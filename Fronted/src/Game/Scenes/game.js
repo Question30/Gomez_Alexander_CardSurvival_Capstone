@@ -2,6 +2,7 @@ import Player from "../GameObjects/player";
 import EnemyGenerator from "../GameObjects/generateEnemies";
 import Phaser from "phaser";
 import PowerUp from "../GameObjects/powerUp";
+import { EventBus } from "./eventbus";
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -16,6 +17,7 @@ export default class Game extends Phaser.Scene {
     this.startTime = new Date();
     this.score = 0;
     this.powerUp = null;
+    this.totalTime = 0;
   }
 
   create() {
@@ -55,6 +57,8 @@ export default class Game extends Phaser.Scene {
     this.addShots();
     this.addPowerUps();
     this.addColliders();
+
+    EventBus.emit("current-scene-ready", this);
   }
 
   update() {
@@ -247,11 +251,14 @@ export default class Game extends Phaser.Scene {
 
   finishScene() {
     this.scene.stop("game");
-    const scene = this.number < 2 ? "transition" : "outro";
+    this.totalTime = new Date() - this.startTime;
+    // const scene = this.number < 2 ? "transition" : "outro";
     this.scene.start("outro", {
       next: "game",
       name: "STAGE",
       number: 1,
+      score: this.score,
+      time: this.totalTime,
     });
   }
 }
