@@ -229,9 +229,21 @@ export default class Game extends Phaser.Scene {
   }
 
   killPlayerShot(shot, player) {
-    shot.dead();
-    player.dead();
-    this.endScene();
+    if (shot.name == "bossCircle") {
+      player.canMove = false;
+      this.time.delayedCall(2000, () => {
+        player.canMove = true;
+      });
+      player.timer.reset({
+        callback: player.onTimerComplete,
+        callbackScope: player,
+        delay: player.attackSpd,
+      });
+    } else {
+      shot.dead();
+      player.dead();
+      this.endScene();
+    }
   }
 
   killPlayer(enemy, player) {

@@ -48,6 +48,15 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
     );
   }
 
+  rage() {
+    if (this.isDead == false) {
+      this.anims.play("chargeBossTwo", true);
+      this.scene.time.delayedCall(3000, () => {
+        this.rageAttack();
+      });
+    }
+  }
+
   rageAttack() {
     const arrowUp = new Arrow(
       this.scene,
@@ -81,6 +90,11 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
     );
     this.scene.enemiesShotGroup.add(arrowLeft);
     this.scene.physics.moveTo(arrowLeft, -this.scene.width, this.y, 120);
+    this.timer.reset({
+      callback: this.onTimerComplete,
+      callbackScope: this,
+      delay: 10000,
+    });
   }
 
   addAnimations() {
@@ -97,13 +111,19 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
       frameRate: 2,
       repeat: -1,
     });
+    this.scene.anims.create({
+      key: "chargeBossTwo",
+      frames: this.anims.generateFrameNumbers(this.name, { start: 5, end: 10 }),
+      frameRate: 2,
+      repeat: 0,
+    });
 
     this.anims.play("shootBossTwo", true);
     this.on("animationcomplete", this.animationComplete, this);
   }
 
   animationComplete(animation, frame) {
-    if (animation.key == "reload") {
+    if (animation.key == "reload" || animation.key == "chargeBossTwo") {
       this.anims.play("shootBossTwo", true);
       this.attacking = false;
       this.body.setImmovable(false);
@@ -125,8 +145,7 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
     if (this.isDead == false) {
       this.anims.play("reload", true);
       this.attacking = true;
-      // this.shoot();
-      this.rageAttack();
+      this.shoot();
       this.scene.time.delayedCall(250, () => {
         this.shoot();
       });
@@ -157,7 +176,11 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
       this.attacking = true;
       this.body.reset(this.x, this.y);
       this.body.setImmovable(true);
-      this.attack();
+      if (Phaser.Math.Between(1, 6) > 4) {
+        this.rage();
+      } else {
+        this.attack();
+      }
     }
   }
 

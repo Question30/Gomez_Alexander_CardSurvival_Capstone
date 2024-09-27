@@ -30,6 +30,7 @@ class Player extends Phaser.GameObjects.Sprite {
     this.attackSpd = 1000;
     this.moveSpd = 1.5;
     this.bullets = 1;
+    this.canMove = true;
   }
   init() {
     this.alive = true;
@@ -51,23 +52,26 @@ class Player extends Phaser.GameObjects.Sprite {
   }
 
   update() {
-    if (this.W.isDown) {
-      this.y -= this.moveSpd;
-      this.setFacing("UP");
-    } else if (this.A.isDown) {
-      this.x -= this.moveSpd;
-      this.setFacing("LEFT");
-    } else if (this.S.isDown) {
-      this.y += this.moveSpd;
-      this.setFacing("DOWN");
-    } else if (this.D.isDown) {
-      this.x += this.moveSpd;
-      this.setFacing("RIGHT");
+    console.log(this.canMove);
+    if (this.canMove) {
+      if (this.W.isDown) {
+        this.y -= this.moveSpd;
+        this.setFacing("UP");
+      } else if (this.A.isDown) {
+        this.x -= this.moveSpd;
+        this.setFacing("LEFT");
+      } else if (this.S.isDown) {
+        this.y += this.moveSpd;
+        this.setFacing("DOWN");
+      } else if (this.D.isDown) {
+        this.x += this.moveSpd;
+        this.setFacing("RIGHT");
+      }
     }
   }
 
   onTimerComplete() {
-    if (this.alive) {
+    if (this.alive && this.canMove) {
       this.shoot();
       this.timer.reset({
         callback: this.onTimerComplete,
