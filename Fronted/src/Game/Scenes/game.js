@@ -182,7 +182,15 @@ export default class Game extends Phaser.Scene {
 
   onWorldBounds(body, t) {
     const name = body.gameObject.name.toString();
-    if (["shot", "bossOneShot", "bossTwoShot", "bossTwoArrow"].includes(name)) {
+    if (
+      [
+        "shot",
+        "bossOneShot",
+        "bossTwoShot",
+        "bossTwoArrow",
+        "bossThreeShot",
+      ].includes(name)
+    ) {
       body.gameObject.destroy();
     }
   }

@@ -66,7 +66,7 @@ export default class BossThree extends Phaser.GameObjects.Sprite {
       key: "gotem",
       frames: this.anims.generateFrameNumbers(this.name, { start: 0, end: 3 }),
       frameRate: 2,
-      repeat: -1,
+      repeat: 0,
     });
     this.scene.anims.create({
       key: "spreadAttk",
@@ -87,6 +87,11 @@ export default class BossThree extends Phaser.GameObjects.Sprite {
         this.body.setImmovable(false);
         this.followPlayer();
       });
+    } else if (animation.key == "gotem") {
+      this.anims.play("walk", true);
+      this.attacking = false;
+      this.body.setImmovable(false);
+      this.followPlayer();
     }
   }
   takeDamage(num) {
@@ -169,6 +174,7 @@ export default class BossThree extends Phaser.GameObjects.Sprite {
   }
 
   gotem() {
+    this.anims.play("gotem", true);
     this.circle = new BossCircle(this.scene, this.x, this.y);
     this.scene.enemiesShotGroup.add(this.circle);
     this.scene.time.delayedCall(4000, () => {
@@ -181,8 +187,11 @@ export default class BossThree extends Phaser.GameObjects.Sprite {
       this.attacking = true;
       this.body.reset(this.x, this.y);
       this.body.setImmovable(true);
-      // this.spreadAttack();
-      this.gotem();
+      if (Phaser.Math.Between(1, 6) > 4) {
+        this.gotem();
+      } else {
+        this.spreadAttack();
+      }
     }
   }
 
