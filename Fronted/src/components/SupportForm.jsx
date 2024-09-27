@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 function SupportForm() {
   const [formData, setFormData] = useState({
@@ -13,7 +14,17 @@ function SupportForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData);
+
+    emailjs.send(
+      "service_nb2vhi3",
+      "template_7704kif",
+      {
+        from_name: formData.email,
+        to_name: "Card Survival Team",
+        message: formData.dropdown + "\n" + formData.details,
+      },
+      "NnEasYqJS9OsPRnvm"
+    );
   };
 
   return (

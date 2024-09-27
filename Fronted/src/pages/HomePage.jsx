@@ -1,5 +1,5 @@
 import NavBar from "../components/NavBar";
-import palcehoder from "../assets/placeholder.png";
+import screenShot from "../assets/game.png";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 
@@ -9,23 +9,15 @@ function HomePage() {
       <NavBar links={["Play", "Leaderboard", "Support", "Login/Signup"]} />
       <div className="flex flex-col xl:flex-row justify-center w-full xl:border-b-black xl:border-b-2  xl:max-h-[500px] overflow-hidden">
         <div className="xl:border-r-black xl:border-r-2 xl:w-1/2 w-full border-b-black border-b-2 object-contain h-[500px]">
-          <img className="w-3/4 h-full m-auto" src={palcehoder} alt="" />
+          <img className="w-3/4 h-full m-auto" src={screenShot} alt="" />
         </div>
-        <section className="xl:w-1/2 min-h-full pt-10">
+        <section className="xl:w-1/2 min-h-full pt-10 md:border-b-black border-b-2">
           <h2 className="text-center underline text-6xl">About the game</h2>
-          <p className=" p-5 text-2xl">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
-            incidunt alias quia eius necessitatibus qui minus dolorem similique
-            ducimus quo doloribus cumque consequatur aspernatur iusto magni,
-            sequi sapiente distinctio excepturi? Corrupti, mollitia fuga?
-            Quisquam, doloremque quis nam, saepe quas cumque iusto enim, magni
-            quidem animi repudiandae! Quaerat exercitationem ipsa nisi
-            repellendus commodi provident, officia at, ea dolores consectetur
-            aut minima. Fuga error asperiores doloremque, libero voluptatum
-            cumque officiis deleniti animi provident! Soluta ratione, repellat
-            atque veritatis corrupti officiis earum doloremque voluptas ex
-            itaque, sapiente, cum voluptate consectetur qui. Architecto,
-            similique!
+          <p className=" p-5 text-2xl my-5">
+            Welcome to Card Survival Game, where the goal is to survive 10 waves
+            without getting hit. Move your player with the W A S D keys and aim
+            your shots with the mouse. You gain a power up after each wave. Can
+            you survive all 10 waves and become the top scorer?!
           </p>
         </section>
       </div>
