@@ -8,6 +8,8 @@ function SupportForm() {
     details: "",
   });
 
+  const [sentSuccessful, setSentSuccessful] = useState(false);
+
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -25,6 +27,7 @@ function SupportForm() {
       },
       "NnEasYqJS9OsPRnvm"
     );
+    setSentSuccessful(true);
   };
 
   return (
@@ -73,6 +76,9 @@ function SupportForm() {
       ></textarea>
 
       <button className="w-1/2 h-8 bg-sky-200 mx-auto">Submit</button>
+      {sentSuccessful ? (
+        <h2 className="text-center">Message Sent Successfully</h2>
+      ) : null}
     </form>
   );
 }
