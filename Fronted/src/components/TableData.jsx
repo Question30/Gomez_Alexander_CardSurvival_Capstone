@@ -1,14 +1,11 @@
 import React from "react";
 
-function TableData({ score, index }) {
+function TableData({ score, username, index }) {
   return (
     <tr>
       <td className="border-2 border-slate-950">{index + 1}</td>
-      {Object.keys(score).map((key, index) => (
-        <td key={index} className="border-2 border-slate-950">
-          {score[key]}
-        </td>
-      ))}
+      <td className="border-2 border-slate-950">{username}</td>
+      <td className="border-2 border-slate-950">{score}</td>
     </tr>
   );
 }

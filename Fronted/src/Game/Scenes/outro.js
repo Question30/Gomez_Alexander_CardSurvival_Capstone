@@ -9,6 +9,7 @@ export default class Outro extends Phaser.Scene {
   init(data) {
     this.score = data.score;
     this.totalTime = data.time;
+    this.completed = data.completed;
   }
 
   create() {
@@ -64,14 +65,10 @@ export default class Outro extends Phaser.Scene {
   }
 
   showInstructions() {
-    this.add.text(
-      this.center_width - 200,
-      this.center_height - 80,
-      "GAME OVER",
-      {
-        fontSize: 80,
-      }
-    );
+    const text = this.completed ? "YOU WIN" : "GAME OVER";
+    this.add.text(this.center_width - 200, this.center_height - 80, text, {
+      fontSize: 80,
+    });
     this.space = this.add.text(
       this.center_width - 300,
       this.center_height,

@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import BossTwoShot from "./bossTwoShot";
+import Arrow from "./arrow";
 
 export default class BossTwo extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, name = "bossTwo") {
@@ -10,8 +11,8 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
     this.setScale(1);
     this.body.setCollideWorldBounds(true);
     this.isDead = false;
-    this.startHealth = 750;
-    this.health = 750;
+    this.startHealth = 1000;
+    this.health = 1000;
     this.attacking = false;
 
     this.name = name;
@@ -47,6 +48,41 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
     );
   }
 
+  rageAttack() {
+    const arrowUp = new Arrow(
+      this.scene,
+      this.x,
+      this.y - this.height,
+
+      -Math.PI / 2
+    );
+    this.scene.enemiesShotGroup.add(arrowUp);
+    this.scene.physics.moveTo(arrowUp, this.x, -this.scene.height, 120);
+
+    const arrowDown = new Arrow(
+      this.scene,
+      this.x,
+      this.y + this.height,
+      Math.PI / 2
+    );
+    this.scene.enemiesShotGroup.add(arrowDown);
+    this.scene.physics.moveTo(arrowDown, this.x, this.scene.height, 120);
+
+    const arrowRight = new Arrow(this.scene, this.x + this.width, this.y, 0);
+    this.scene.enemiesShotGroup.add(arrowRight);
+    this.scene.physics.moveTo(arrowRight, this.scene.width, this.y, 120);
+
+    const arrowLeft = new Arrow(
+      this.scene,
+      this.x - this.width,
+      this.y,
+
+      -Math.PI
+    );
+    this.scene.enemiesShotGroup.add(arrowLeft);
+    this.scene.physics.moveTo(arrowLeft, -this.scene.width, this.y, 120);
+  }
+
   addAnimations() {
     this.scene.anims.create({
       key: "reload",
@@ -66,7 +102,7 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
     this.on("animationcomplete", this.animationComplete, this);
   }
 
-  animationComplete(animation, fram) {
+  animationComplete(animation, frame) {
     if (animation.key == "reload") {
       this.anims.play("shootBossTwo", true);
       this.attacking = false;
@@ -89,7 +125,8 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
     if (this.isDead == false) {
       this.anims.play("reload", true);
       this.attacking = true;
-      this.shoot();
+      // this.shoot();
+      this.rageAttack();
       this.scene.time.delayedCall(250, () => {
         this.shoot();
       });

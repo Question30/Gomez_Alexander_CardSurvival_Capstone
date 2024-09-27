@@ -18,6 +18,7 @@ export default class Game extends Phaser.Scene {
     this.score = 0;
     this.powerUp = null;
     this.totalTime = 0;
+    this.completed = false;
   }
 
   create() {
@@ -70,6 +71,7 @@ export default class Game extends Phaser.Scene {
 
     if (this.number > 10) {
       this.endScene();
+      this.completed = true;
     }
   }
   newWave() {
@@ -180,7 +182,7 @@ export default class Game extends Phaser.Scene {
 
   onWorldBounds(body, t) {
     const name = body.gameObject.name.toString();
-    if (["foeshot", "shot", "bossOneShot"].includes(name)) {
+    if (["shot", "bossOneShot", "bossTwoShot", "bossTwoArrow"].includes(name)) {
       body.gameObject.destroy();
     }
   }
@@ -240,7 +242,7 @@ export default class Game extends Phaser.Scene {
 
   endScene() {
     this.time.delayedCall(
-      2000,
+      1000,
       () => {
         this.finishScene();
       },
@@ -252,13 +254,13 @@ export default class Game extends Phaser.Scene {
   finishScene() {
     this.scene.stop("game");
     this.totalTime = new Date() - this.startTime;
-    // const scene = this.number < 2 ? "transition" : "outro";
     this.scene.start("outro", {
       next: "game",
       name: "STAGE",
       number: 1,
       score: this.score,
       time: this.totalTime,
+      completed: this.completed,
     });
   }
 }

@@ -13,6 +13,7 @@ function GamePage() {
       const score = {
         score: scene.score,
         time: time,
+        complete: scene.completed,
       };
       usersService.addScore(score);
     }

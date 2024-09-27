@@ -1,7 +1,7 @@
-import React from "react";
 import TableData from "./TableData";
 
 function Leaderboard({ heading, colNames, scores }) {
+  console.log(heading, colNames, scores);
   return (
     <table className="w-3/4 border-2 border-collapse border-slate-950">
       <thead>
@@ -20,7 +20,12 @@ function Leaderboard({ heading, colNames, scores }) {
           ))}
         </tr>
         {scores.map((score, index) => (
-          <TableData score={score} index={index} key={index} />
+          <TableData
+            score={score.score}
+            username={score.username}
+            index={index}
+            key={index}
+          />
         ))}
       </tbody>
     </table>

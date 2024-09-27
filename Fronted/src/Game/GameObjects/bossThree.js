@@ -9,8 +9,8 @@ export default class BossThree extends Phaser.GameObjects.Sprite {
     this.setScale(1);
     this.body.setCollideWorldBounds(true);
     this.isDead = false;
-    this.startHealth = 1000;
-    this.health = 1000;
+    this.startHealth = 1500;
+    this.health = 1500;
     this.attacking = false;
     this.name = name;
     this.body.setSize(64, 64);

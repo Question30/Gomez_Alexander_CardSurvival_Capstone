@@ -18,7 +18,8 @@ export async function addScore(score) {
   const token = getToken();
   if (token) {
     const userName = getUser();
-    await usersApi.addScore(score, userName);
+    const scoreObj = { ...score, username: userName };
+    await usersApi.addScore(scoreObj, userName);
     return "Score Added";
   }
 
