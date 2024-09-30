@@ -73,12 +73,16 @@ class Player extends Phaser.GameObjects.Sprite {
   onTimerComplete() {
     if (this.alive && this.canMove) {
       this.shoot();
-      this.timer.reset({
-        callback: this.onTimerComplete,
-        callbackScope: this,
-        delay: this.attackSpd,
-      });
+      this.resetTimer();
     }
+  }
+
+  resetTimer() {
+    this.timer.reset({
+      callback: this.onTimerComplete,
+      callbackScope: this,
+      delay: this.attackSpd,
+    });
   }
 
   shoot() {
@@ -96,50 +100,120 @@ class Player extends Phaser.GameObjects.Sprite {
 
       this.scene.shots.add(shot);
 
-      this.scene.physics.moveTo(shot, mouseX, mouseY, 120);
+      this.scene.physics.moveTo(shot, mouseX, mouseY, 200);
     } else if (this.bullets == 2) {
-      const shot1 = new Shot(this.scene, this.x, this.y, this.name);
-      const shot2 = new Shot(this.scene, shot1.x + 6, shot1.y + 6, this.name);
+      const shot1 = new Shot(
+        this.scene,
+        this.x,
+        this.y,
+        this.name,
+        mouseX,
+        mouseY
+      );
+      const shot2 = new Shot(
+        this.scene,
+        shot1.x + 12,
+        shot1.y + 12,
+        this.name,
+        mouseX,
+        mouseY
+      );
       this.scene.shots.add(shot1);
 
-      this.scene.physics.moveTo(shot1, mouseX, mouseY, 120);
+      this.scene.physics.moveTo(shot1, mouseX, mouseY, 200);
       this.scene.shots.add(shot2);
 
-      this.scene.physics.moveTo(shot2, mouseX + 10, mouseY + 10, 120);
+      this.scene.physics.moveTo(shot2, mouseX + 10, mouseY + 10, 200);
     } else if (this.bullets == 3) {
-      const shot1 = new Shot(this.scene, this.x, this.y, this.name);
-      const shot2 = new Shot(this.scene, shot1.x + 6, shot1.y + 6, this.name);
-      const shot3 = new Shot(this.scene, shot1.x - 6, shot1.y - 6, this.name);
+      const shot1 = new Shot(
+        this.scene,
+        this.x,
+        this.y,
+        this.name,
+        mouseX,
+        mouseY
+      );
+      const shot2 = new Shot(
+        this.scene,
+        shot1.x + 12,
+        shot1.y + 12,
+        this.name,
+        mouseX,
+        mouseY
+      );
+      const shot3 = new Shot(
+        this.scene,
+        shot1.x - 12,
+        shot1.y - 12,
+        this.name,
+        mouseX,
+        mouseY
+      );
       this.scene.shots.add(shot1);
 
-      this.scene.physics.moveTo(shot1, mouseX, mouseY, 120);
+      this.scene.physics.moveTo(shot1, mouseX, mouseY, 200);
       this.scene.shots.add(shot2);
 
-      this.scene.physics.moveTo(shot2, mouseX + 30, mouseY + 30, 120);
+      this.scene.physics.moveTo(shot2, mouseX + 30, mouseY + 30, 200);
       this.scene.shots.add(shot3);
 
-      this.scene.physics.moveTo(shot3, mouseX - 30, mouseY - 30, 120);
+      this.scene.physics.moveTo(shot3, mouseX - 30, mouseY - 30, 200);
     } else {
-      const shot1 = new Shot(this.scene, this.x, this.y, this.name);
-      const shot2 = new Shot(this.scene, shot1.x + 6, shot1.y + 6, this.name);
-      const shot3 = new Shot(this.scene, shot1.x - 6, shot1.y - 6, this.name);
-      const shot4 = new Shot(this.scene, shot3.x + 6, shot3.y + 6, this.name);
-      const shot5 = new Shot(this.scene, shot2.x - 6, shot2.y - 6, this.name);
+      const shot1 = new Shot(
+        this.scene,
+        this.x,
+        this.y,
+        this.name,
+        mouseX,
+        mouseY
+      );
+      const shot2 = new Shot(
+        this.scene,
+        shot1.x + 12,
+        shot1.y + 12,
+        this.name,
+        mouseX,
+        mouseY
+      );
+      const shot3 = new Shot(
+        this.scene,
+        shot1.x - 12,
+        shot1.y - 12,
+        this.name,
+        mouseX,
+        mouseY
+      );
+      const shot4 = new Shot(
+        this.scene,
+        shot3.x + 12,
+        shot3.y + 12,
+        this.name,
+        mouseX,
+        mouseY
+      );
+      const shot5 = new Shot(
+        this.scene,
+        shot2.x - 12,
+        shot2.y - 12,
+        this.name,
+        mouseX,
+        mouseY
+      );
       this.scene.shots.add(shot1);
 
-      this.scene.physics.moveTo(shot1, mouseX, mouseY, 120);
+      this.scene.physics.moveTo(shot1, mouseX, mouseY, 200);
       this.scene.shots.add(shot2);
 
-      this.scene.physics.moveTo(shot2, mouseX + 30, mouseY + 30, 120);
+      this.scene.physics.moveTo(shot2, mouseX + 30, mouseY + 30, 200);
       this.scene.shots.add(shot3);
 
-      this.scene.physics.moveTo(shot3, mouseX - 30, mouseY - 30, 120);
+      this.scene.physics.moveTo(shot3, mouseX - 30, mouseY - 30, 200);
       this.scene.shots.add(shot4);
 
-      this.scene.physics.moveTo(shot4, mouseX - 60, mouseY - 60, 120);
+      this.scene.physics.moveTo(shot4, mouseX - 60, mouseY - 60, 200);
       this.scene.shots.add(shot5);
 
-      this.scene.physics.moveTo(shot5, mouseX + 60, mouseY + 60, 120);
+      this.scene.physics.moveTo(shot5, mouseX + 60, mouseY + 60, 200);
     }
 
     this.anims.play("shoot", true);

@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-
 export default class Arrow extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, radian) {
     super(scene, x, y, "bossTwoArrow");

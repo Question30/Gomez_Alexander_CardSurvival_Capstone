@@ -16,7 +16,8 @@ class Shot extends Phaser.GameObjects.Sprite {
     this.mouseY = mouseY;
   }
 
-  init() {
+  init() {}
+  update() {
     this.setRotation(
       Phaser.Math.Angle.Between(this.x, this.y, this.mouseX, this.mouseY)
     );

@@ -49,7 +49,7 @@ function LeaderboardPage() {
         {topTimes.length > 0 ? (
           <Leaderboard
             heading="Top 5 Scores"
-            colNames={["Rank", "Username", "Score"]}
+            colNames={["Rank", "Username", "Time"]}
             scores={topTimes}
           />
         ) : (

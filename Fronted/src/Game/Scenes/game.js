@@ -19,6 +19,8 @@ export default class Game extends Phaser.Scene {
     this.powerUp = null;
     this.totalTime = 0;
     this.completed = false;
+    this.baseScore = 100;
+    this.multiplyer = 1;
   }
 
   create() {
@@ -58,6 +60,12 @@ export default class Game extends Phaser.Scene {
     this.addShots();
     this.addPowerUps();
     this.addColliders();
+    this.time.delayedCall(1000 * 30, () => {
+      this.multiplyer = 0.75;
+    });
+    this.time.delayedCall(1000 * 60, () => {
+      this.multiplyer = 0.5;
+    });
 
     EventBus.emit("current-scene-ready", this);
   }
@@ -75,6 +83,7 @@ export default class Game extends Phaser.Scene {
     }
   }
   newWave() {
+    this.multiplyer = 1;
     const powerUpName =
       this.availablePowerups[
         Phaser.Math.Between(0, this.availablePowerups.length - 1)
@@ -89,6 +98,12 @@ export default class Game extends Phaser.Scene {
     this.number += 1;
     this.enemies = new EnemyGenerator(this);
     this.updateWave();
+    this.time.delayedCall(1000 * 30, () => {
+      this.multiplyer = 0.75;
+    });
+    this.time.delayedCall(1000 * 60, () => {
+      this.multiplyer = 0.5;
+    });
   }
 
   updateWave() {
@@ -99,6 +114,7 @@ export default class Game extends Phaser.Scene {
     this.enemiesGroup = this.add.group();
     this.enemiesWaveGroup = this.add.group();
     this.enemiesShotGroup = this.add.group();
+    this.bossCirclegroup = this.add.group();
     this.enemies = new EnemyGenerator(this);
   }
 
@@ -109,14 +125,13 @@ export default class Game extends Phaser.Scene {
   addPowerUps() {
     this.powerUps = this.add.group();
     this.availablePowerups = [
-      { value: "moveSpd", color: 0x00ff00 },
-      { value: "attackSpd", color: 0xffff00 },
-      { value: "extraBullet", color: 0xaaff00 },
+      { value: "moveSpd" },
+      { value: "attackSpd" },
+      { value: "extraBullet" },
     ];
   }
 
   addColliders() {
-    console.log(this.powerUp);
     this.physics.add.collider(
       this.enemiesWaveGroup,
       this.player,
@@ -149,6 +164,25 @@ export default class Game extends Phaser.Scene {
 
     this.physics.add.overlap(
       this.enemiesShotGroup,
+      this.shots,
+      this.destroyShot,
+      () => {
+        true;
+      },
+      this
+    );
+
+    this.physics.add.overlap(
+      this.bossCirclegroup,
+      this.player,
+      this.killPlayerShot,
+      () => {
+        true;
+      },
+      this
+    );
+    this.physics.add.overlap(
+      this.bossCirclegroup,
       this.shots,
       this.destroyShot,
       () => {
@@ -217,13 +251,13 @@ export default class Game extends Phaser.Scene {
       enemy.takeDamage(10 / this.player.bullets);
       if (enemy.health < 1) {
         enemy.dead();
-        this.updateScore(1000);
+        this.updateScore(1000 * this.multiplyer);
       }
       shot.destroy();
     } else {
       enemy.dead();
       shot.destroy();
-      this.updateScore(100);
+      this.updateScore(this.baseScore * this.multiplyer);
     }
   }
 
@@ -242,11 +276,7 @@ export default class Game extends Phaser.Scene {
       this.time.delayedCall(2000, () => {
         player.canMove = true;
       });
-      player.timer.reset({
-        callback: player.onTimerComplete,
-        callbackScope: player,
-        delay: player.attackSpd,
-      });
+      player.resetTimer();
     } else {
       shot.dead();
       player.dead();

@@ -11,8 +11,8 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
     this.setScale(1);
     this.body.setCollideWorldBounds(true);
     this.isDead = false;
-    this.startHealth = 1000;
-    this.health = 1000;
+    this.startHealth = 625;
+    this.health = 625;
     this.attacking = false;
 
     this.name = name;
@@ -54,6 +54,11 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
       this.scene.time.delayedCall(3000, () => {
         this.rageAttack();
       });
+      this.timer.reset({
+        callback: this.onTimerComplete,
+        callbackScope: this,
+        delay: 10000,
+      });
     }
   }
 
@@ -62,7 +67,6 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
       this.scene,
       this.x,
       this.y - this.height,
-
       -Math.PI / 2
     );
     this.scene.enemiesShotGroup.add(arrowUp);
@@ -90,11 +94,6 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
     );
     this.scene.enemiesShotGroup.add(arrowLeft);
     this.scene.physics.moveTo(arrowLeft, -this.scene.width, this.y, 120);
-    this.timer.reset({
-      callback: this.onTimerComplete,
-      callbackScope: this,
-      delay: 10000,
-    });
   }
 
   addAnimations() {
@@ -185,6 +184,7 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
   }
 
   dead() {
+    this.timer.destroy();
     this.isDead = true;
     this.loadBar.destroy();
     this.progressBar.destroy();

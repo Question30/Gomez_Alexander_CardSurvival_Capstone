@@ -11,8 +11,8 @@ export default class BossThree extends Phaser.GameObjects.Sprite {
     this.setScale(1);
     this.body.setCollideWorldBounds(true);
     this.isDead = false;
-    this.startHealth = 1500;
-    this.health = 1500;
+    this.startHealth = 750;
+    this.health = 750;
     this.attacking = false;
     this.name = name;
     this.body.setSize(64, 64);
@@ -176,9 +176,14 @@ export default class BossThree extends Phaser.GameObjects.Sprite {
   gotem() {
     this.anims.play("gotem", true);
     this.circle = new BossCircle(this.scene, this.x, this.y);
-    this.scene.enemiesShotGroup.add(this.circle);
+    this.scene.bossCirclegroup.add(this.circle);
     this.scene.time.delayedCall(4000, () => {
       this.circle.destroy();
+    });
+    this.timer.reset({
+      callback: this.onTimerComplete,
+      callbackScope: this,
+      delay: 10000,
     });
   }
 
@@ -196,6 +201,7 @@ export default class BossThree extends Phaser.GameObjects.Sprite {
   }
 
   dead() {
+    this.timer.destroy();
     this.progressBar.destroy();
     this.loadBar.destroy();
     this.isDead = true;

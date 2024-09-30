@@ -1,7 +1,8 @@
 import TableData from "./TableData";
 
 function Leaderboard({ heading, colNames, scores }) {
-  console.log(heading, colNames, scores);
+  const item = colNames[2] === "Time" ? "time" : "score";
+  const scoresDisplay = colNames[2] === "Time" ? scores.reverse() : scores;
   return (
     <table className="w-3/4 border-2 border-collapse border-slate-950">
       <thead>
@@ -19,9 +20,9 @@ function Leaderboard({ heading, colNames, scores }) {
             </td>
           ))}
         </tr>
-        {scores.map((score, index) => (
+        {scoresDisplay.map((score, index) => (
           <TableData
-            score={score.score}
+            score={score[item]}
             username={score.username}
             index={index}
             key={index}
