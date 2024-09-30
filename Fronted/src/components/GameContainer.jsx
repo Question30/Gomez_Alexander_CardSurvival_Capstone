@@ -41,6 +41,7 @@ export const GameContainer = forwardRef(function GameContainer(
 
   return (
     <div
+      className="mt-10"
       id="game_container"
       // className="border my-20 mx-auto bg-gray-500 w-4/5 "
     ></div>

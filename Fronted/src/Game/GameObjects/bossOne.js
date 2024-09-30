@@ -159,9 +159,10 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
 
   dead() {
     this.isDead = true;
+    this.destroy();
     this.progressBar.destroy();
     this.loadBar.destroy();
-    this.destroy();
+    this.timer.destroy();
   }
 
   createHealthBar() {

@@ -5,6 +5,8 @@ import BossOnePng from "../../assets/images/bossOne.png";
 import BossTwoPng from "../../assets/images/bossTwo.png";
 import BossThreePng from "../../assets/images/bossThree.png";
 import bossTwoArrow from "../../assets/images/bossTwoArrow.png";
+import card from "../../assets/images/card.png";
+import powerup from "../../assets/images/powerup.png";
 
 export default class Loader extends Phaser.Scene {
   constructor() {
@@ -74,6 +76,14 @@ export default class Loader extends Phaser.Scene {
       frameHeight: 128,
     });
     this.load.spritesheet("bossTwoArrow", bossTwoArrow, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet("card", card, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet("powerup", powerup, {
       frameWidth: 32,
       frameHeight: 32,
     });

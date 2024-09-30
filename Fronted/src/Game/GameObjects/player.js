@@ -25,6 +25,7 @@ class Player extends Phaser.GameObjects.Sprite {
       UP: false,
       DOWN: true,
     };
+
     this.alive = false;
     this.init();
     this.attackSpd = 1000;
@@ -52,7 +53,6 @@ class Player extends Phaser.GameObjects.Sprite {
   }
 
   update() {
-    console.log(this.canMove);
     if (this.canMove) {
       if (this.W.isDown) {
         this.y -= this.moveSpd;
@@ -85,7 +85,14 @@ class Player extends Phaser.GameObjects.Sprite {
     const { mouseX, mouseY } = this.getMouseCoords();
 
     if (this.bullets == 1) {
-      const shot = new Shot(this.scene, this.x, this.y, this.name);
+      const shot = new Shot(
+        this.scene,
+        this.x,
+        this.y,
+        this.name,
+        mouseX,
+        mouseY
+      );
 
       this.scene.shots.add(shot);
 
