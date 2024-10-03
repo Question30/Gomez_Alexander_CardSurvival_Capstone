@@ -1,22 +1,4 @@
-<br/>
-<p align="center">
-
-  <h3 align="center">Card Survival Capstone Project</h3>
-
-  <p align="center">
-    A Website that hosts the Card Sruvial Game
-    <br/>
-    <br/>
-    <!-- <a href="https://github.com/Question30/fitness-app"><strong>Check out the repo »</strong></a>
-    <br/>
-    <br/>
-    <a href="https://fitness-tracker-87za.onrender.com/">View Demo</a>
-    .
-    <a href="https://github.com/Question30/fitness-app/issues">Report Bug</a>
-    .
-    <a href="https://github.com/Question30/fitness-app/issues">Request Feature</a> -->
-  </p>
-</p>
+# Card Survival Game
 
 ## Table Of Contents
 
@@ -27,9 +9,11 @@
 
 ## About The Project
 
-<!-- ![Screen Shot](https://i.imgur.com/aOpu7z5.png) -->
+Created a FullStack web application to host the Card Survival Game. A Simple shooting game, where the goal is to clear 10 waves of enemies and bosses while collecting powerups. Also featuring a leaderboard for the highest scores and fastest completion times.
 
-Created a FullStack application featuring a game built with Phaser.js
+![Screen Shot](./Fronted/src/assets/game.png)
+
+## Planning Phase
 
 ## Built With
 
