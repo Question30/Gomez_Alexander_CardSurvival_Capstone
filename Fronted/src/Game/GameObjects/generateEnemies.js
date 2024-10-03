@@ -3,6 +3,7 @@ import BossThree from "./bossThree";
 import BossTwo from "./bossTwo";
 import Enemy from "./enemy";
 import Phaser from "phaser";
+import Turret from "./turret";
 
 class EnemyGenerator {
   constructor(scene) {
@@ -67,7 +68,14 @@ class EnemyGenerator {
   addToWave(i) {
     let x = this.getX();
     let y = this.getY();
-    const enemy = new Enemy(this.scene, x, y);
+
+    if (Phaser.Math.Between(1, 105) > 100) {
+      const enemy = new Turret(this.scene, x, y);
+      this.scene.enemiesWaveGroup.add(enemy);
+    } else {
+      const enemy = new Enemy(this.scene, x, y);
+      this.scene.enemiesWaveGroup.add(enemy);
+    }
     this.scene.tweens.add({
       targets: this,
       z: 1,
@@ -77,7 +85,6 @@ class EnemyGenerator {
       delay: i * 100,
     });
     this;
-    this.scene.enemiesWaveGroup.add(enemy);
   }
 
   getX() {

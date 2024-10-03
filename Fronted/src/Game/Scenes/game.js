@@ -76,34 +76,34 @@ export default class Game extends Phaser.Scene {
     if (this.enemiesWaveGroup.getLength() === 0) {
       this.newWave();
     }
-
+  }
+  newWave() {
+    this.number += 1;
     if (this.number > 10) {
       this.endScene();
       this.completed = true;
+    } else {
+      this.multiplyer = 1;
+      const powerUpName =
+        this.availablePowerups[
+          Phaser.Math.Between(0, this.availablePowerups.length - 1)
+        ];
+      this.powerUp = new PowerUp(
+        this,
+        this.center_width,
+        this.center_height,
+        powerUpName.value,
+        powerUpName.color
+      );
+      this.enemies = new EnemyGenerator(this);
+      this.updateWave();
+      this.time.delayedCall(1000 * 30, () => {
+        this.multiplyer = 0.75;
+      });
+      this.time.delayedCall(1000 * 60, () => {
+        this.multiplyer = 0.5;
+      });
     }
-  }
-  newWave() {
-    this.multiplyer = 1;
-    const powerUpName =
-      this.availablePowerups[
-        Phaser.Math.Between(0, this.availablePowerups.length - 1)
-      ];
-    this.powerUp = new PowerUp(
-      this,
-      this.center_width,
-      this.center_height,
-      powerUpName.value,
-      powerUpName.color
-    );
-    this.number += 1;
-    this.enemies = new EnemyGenerator(this);
-    this.updateWave();
-    this.time.delayedCall(1000 * 30, () => {
-      this.multiplyer = 0.75;
-    });
-    this.time.delayedCall(1000 * 60, () => {
-      this.multiplyer = 0.5;
-    });
   }
 
   updateWave() {
@@ -223,6 +223,7 @@ export default class Game extends Phaser.Scene {
         "bossTwoShot",
         "bossTwoArrow",
         "bossThreeShot",
+        "turretShot",
       ].includes(name)
     ) {
       body.gameObject.destroy();
@@ -231,9 +232,9 @@ export default class Game extends Phaser.Scene {
 
   pickUpPowerUp(player, powerUp) {
     if (powerUp.name === "attackSpd") {
-      player.attackSpd -= 200;
+      player.attackSpd -= 100;
     } else if (powerUp.name == "moveSpd") {
-      player.moveSpd += 0.5;
+      player.moveSpd += 0.25;
     } else if (powerUp.name == "extraBullet") {
       player.bullets++;
     }
@@ -285,7 +286,6 @@ export default class Game extends Phaser.Scene {
   }
 
   killPlayer(enemy, player) {
-    enemy.dead();
     player.dead();
     this.endScene();
   }

@@ -7,6 +7,8 @@ import BossThreePng from "../../assets/images/bossThree.png";
 import bossTwoArrow from "../../assets/images/bossTwoArrow.png";
 import card from "../../assets/images/card.png";
 import powerup from "../../assets/images/powerup.png";
+import turret from "../../assets/images/turret.png";
+import bullet from "../../assets/images/bullet.png";
 
 export default class Loader extends Phaser.Scene {
   constructor() {
@@ -84,6 +86,14 @@ export default class Loader extends Phaser.Scene {
       frameHeight: 32,
     });
     this.load.spritesheet("powerup", powerup, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet("turret", turret, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet("bullet", bullet, {
       frameWidth: 32,
       frameHeight: 32,
     });

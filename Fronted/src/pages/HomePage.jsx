@@ -8,7 +8,7 @@ function HomePage() {
     <div>
       <NavBar links={["Play", "Leaderboard", "Support", "Login/Signup"]} />
       <div className="flex flex-col xl:flex-row justify-center w-full xl:border-b-black xl:border-b-2  xl:max-h-[500px] overflow-hidden">
-        <div className="xl:border-r-black xl:border-r-2 xl:w-1/2 w-full border-b-black border-b-2 object-contain h-[500px]">
+        <div className="xl:border-r-black xl:border-r-2 xl:w-1/2 w-full border-b-black border-b-2 object-contain h-[400px]">
           <img className="w-3/4 h-full m-auto" src={screenShot} alt="" />
         </div>
         <section className="xl:w-1/2 min-h-full pt-10 md:border-b-black border-b-2">
@@ -21,7 +21,7 @@ function HomePage() {
           </p>
         </section>
       </div>
-      <div className="bg-green-600 flex justify-center w-7/12 h-40 rounded-full items-center my-24 mx-auto ">
+      <div className="bg-green-600 flex justify-center w-7/12 h-40 rounded-full items-center my-10 mx-auto ">
         <Link to={"/game"} className="text-9xl text-slate-200">
           PLAY
         </Link>

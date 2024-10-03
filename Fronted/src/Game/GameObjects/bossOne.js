@@ -152,8 +152,9 @@ export default class BossOne extends Phaser.GameObjects.Sprite {
       let dmg = (this.health -= num);
       if (dmg < 0) {
         this.dead();
+      } else {
+        this.updateHealthBar();
       }
-      this.updateHealthBar();
     }
   }
 

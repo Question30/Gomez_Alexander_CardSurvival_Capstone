@@ -7,7 +7,7 @@ import Outro from "./outro";
 
 const config = {
   width: 1000,
-  height: 800,
+  height: 650,
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,

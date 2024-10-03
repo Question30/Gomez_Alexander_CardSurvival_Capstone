@@ -63,37 +63,39 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
   }
 
   rageAttack() {
-    const arrowUp = new Arrow(
-      this.scene,
-      this.x,
-      this.y - this.height,
-      -Math.PI / 2
-    );
-    this.scene.enemiesShotGroup.add(arrowUp);
-    this.scene.physics.moveTo(arrowUp, this.x, -this.scene.height, 120);
+    if (!this.isDead) {
+      const arrowUp = new Arrow(
+        this.scene,
+        this.x,
+        this.y - this.height,
+        -Math.PI / 2
+      );
+      this.scene.enemiesShotGroup.add(arrowUp);
+      this.scene.physics.moveTo(arrowUp, this.x, -this.scene.height, 120);
 
-    const arrowDown = new Arrow(
-      this.scene,
-      this.x,
-      this.y + this.height,
-      Math.PI / 2
-    );
-    this.scene.enemiesShotGroup.add(arrowDown);
-    this.scene.physics.moveTo(arrowDown, this.x, this.scene.height, 120);
+      const arrowDown = new Arrow(
+        this.scene,
+        this.x,
+        this.y + this.height,
+        Math.PI / 2
+      );
+      this.scene.enemiesShotGroup.add(arrowDown);
+      this.scene.physics.moveTo(arrowDown, this.x, this.scene.height, 120);
 
-    const arrowRight = new Arrow(this.scene, this.x + this.width, this.y, 0);
-    this.scene.enemiesShotGroup.add(arrowRight);
-    this.scene.physics.moveTo(arrowRight, this.scene.width, this.y, 120);
+      const arrowRight = new Arrow(this.scene, this.x + this.width, this.y, 0);
+      this.scene.enemiesShotGroup.add(arrowRight);
+      this.scene.physics.moveTo(arrowRight, this.scene.width, this.y, 120);
 
-    const arrowLeft = new Arrow(
-      this.scene,
-      this.x - this.width,
-      this.y,
+      const arrowLeft = new Arrow(
+        this.scene,
+        this.x - this.width,
+        this.y,
 
-      -Math.PI
-    );
-    this.scene.enemiesShotGroup.add(arrowLeft);
-    this.scene.physics.moveTo(arrowLeft, -this.scene.width, this.y, 120);
+        -Math.PI
+      );
+      this.scene.enemiesShotGroup.add(arrowLeft);
+      this.scene.physics.moveTo(arrowLeft, -this.scene.width, this.y, 120);
+    }
   }
 
   addAnimations() {
@@ -135,8 +137,9 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
       let dmg = (this.health -= num);
       if (dmg < 0) {
         this.dead();
+      } else {
+        this.updateHealthBar();
       }
-      this.updateHealthBar();
     }
   }
 
@@ -160,14 +163,16 @@ export default class BossTwo extends Phaser.GameObjects.Sprite {
   }
 
   shoot() {
-    const shot = new BossTwoShot(this.scene, this.x, this.y);
-    this.scene.enemiesShotGroup.add(shot);
-    this.scene.physics.moveTo(
-      shot,
-      this.scene.player.x,
-      this.scene.player.y,
-      250
-    );
+    if (!this.isDead) {
+      const shot = new BossTwoShot(this.scene, this.x, this.y);
+      this.scene.enemiesShotGroup.add(shot);
+      this.scene.physics.moveTo(
+        shot,
+        this.scene.player.x,
+        this.scene.player.y,
+        250
+      );
+    }
   }
 
   onTimerComplete() {

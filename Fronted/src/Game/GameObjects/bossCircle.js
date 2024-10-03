@@ -28,7 +28,7 @@ class BossCircle extends Phaser.GameObjects.PointLight {
 
   grow() {
     if (this.radius < 300) {
-      this.radius += 50;
+      this.radius += 100;
       this.body.setCircle(this.radius);
 
       this.timer.reset({

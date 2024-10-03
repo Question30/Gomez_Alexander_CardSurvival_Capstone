@@ -12,6 +12,7 @@ class Player extends Phaser.GameObjects.Sprite {
     this.A = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.S = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.D = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    this.cursor = this.scene.input.keyboard.createCursorKeys();
     this.SPACE = this.scene.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SPACE
     );
@@ -54,16 +55,19 @@ class Player extends Phaser.GameObjects.Sprite {
 
   update() {
     if (this.canMove) {
-      if (this.W.isDown) {
+      if (this.W.isDown || this.cursor.up.isDown) {
         this.y -= this.moveSpd;
         this.setFacing("UP");
-      } else if (this.A.isDown) {
+      }
+      if (this.A.isDown || this.cursor.left.isDown) {
         this.x -= this.moveSpd;
         this.setFacing("LEFT");
-      } else if (this.S.isDown) {
+      }
+      if (this.S.isDown || this.cursor.down.isDown) {
         this.y += this.moveSpd;
         this.setFacing("DOWN");
-      } else if (this.D.isDown) {
+      }
+      if (this.D.isDown || this.cursor.right.isDown) {
         this.x += this.moveSpd;
         this.setFacing("RIGHT");
       }

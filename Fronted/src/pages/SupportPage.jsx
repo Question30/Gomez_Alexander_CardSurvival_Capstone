@@ -10,7 +10,7 @@ function SupportPage() {
       <h2 className="text-center py-6 text-2xl font-bold">
         Have an issue or question? Complete the form below.
       </h2>
-      <main className="flex flex-col items-center  w-10/12 mx-auto my-10">
+      <main className="flex flex-col items-center  w-10/12 mx-auto my-2">
         <SupportForm />
       </main>
       <Footer />

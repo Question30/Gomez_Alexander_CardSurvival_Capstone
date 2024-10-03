@@ -67,8 +67,8 @@ function SupportForm() {
         Details:
       </label>
       <textarea
-        cols="10"
-        rows="10"
+        cols="5"
+        rows="5"
         name="details"
         id="details"
         value={formData.details}

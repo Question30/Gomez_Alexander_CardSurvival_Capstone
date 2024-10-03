@@ -39,23 +39,9 @@ export const GameContainer = forwardRef(function GameContainer(
     };
   }, [currentActiveScene, ref]);
 
-  return (
-    <div
-      className="mt-10"
-      id="game_container"
-      // className="border my-20 mx-auto bg-gray-500 w-4/5 "
-    ></div>
-  );
+  return <div id="game_container" className="border  mx-auto "></div>;
 });
 
 GameContainer.propTypes = {
   currentActiveScene: PropTypes.func,
 };
-
-// useEffect(() => {
-//   const game = new Phaser.Game(config);
-
-//   return () => {
-//     game.destroy(true);
-//   };
-// }, []);

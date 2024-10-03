@@ -99,8 +99,9 @@ export default class BossThree extends Phaser.GameObjects.Sprite {
       let dmg = (this.health -= num);
       if (dmg < 0) {
         this.dead();
+      } else {
+        this.updateHealthBar();
       }
-      this.updateHealthBar();
     }
   }
 
@@ -165,12 +166,14 @@ export default class BossThree extends Phaser.GameObjects.Sprite {
   }
 
   shootAttack(shot, offset) {
-    this.scene.physics.moveTo(
-      shot,
-      this.scene.player.x + offset,
-      this.scene.player.y + offset,
-      120
-    );
+    if (!this.isDead) {
+      this.scene.physics.moveTo(
+        shot,
+        this.scene.player.x + offset,
+        this.scene.player.y + offset,
+        120
+      );
+    }
   }
 
   gotem() {
