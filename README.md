@@ -23,10 +23,6 @@ Created a FullStack web application to host the Card Survival Game. A Simple sho
 
 [Link to Figma](https://www.figma.com/design/nZBaQXSxVOg6SsUdOr1e5N/Capstone-wireframe?node-id=19-1163&m=dev&t=pmtUHW6yw36InnQJ-1)
 
-### Entiy Relation Diagram
-
-![ERD Screen Shot](./Fronted/src/assets/ERDSS.PNG)
-
 ## Built With
 
 ### Frontend
