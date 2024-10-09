@@ -29,7 +29,7 @@ function LeaderboardPage() {
     getTopTimes();
   }, []);
 
-  // console.log(topScores, topTimes);
+  console.log(topScores);
 
   return (
     <div>

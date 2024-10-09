@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ScoresServices {
@@ -25,4 +26,24 @@ public class ScoresServices {
         List<Scores> scores = scoresRepository.findAll(Sort.by(Sort.Direction.DESC, "time")).stream().filter(Scores::isComplete).toList();
         return scores;
      }
+
+     public void addScore(Scores scores){
+        scoresRepository.save(scores);
+     }
+
+     public void updateScore(Scores scores, Integer id){
+        Optional<Scores> score = scoresRepository.findById(id);
+
+        if (score.isPresent()){
+            Scores newScore = score.get();
+            newScore.setScore(scores.getScore());
+            newScore.setTime(scores.getTime());
+            newScore.setId(scores.getId());
+            newScore.setUsername(scores.getUsername());
+            newScore.setComplete(scores.isComplete());
+            scoresRepository.save(newScore);
+        }
+
+     }
+
 }

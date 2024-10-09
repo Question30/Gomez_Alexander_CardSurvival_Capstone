@@ -42,7 +42,10 @@ public class UserServices {
     //Gets all users and filters for a specified email
     public User findByEmail(String email){
         List<User> users = this.getAllUsers();
-        return users.stream().filter(user -> user.getEmail().equals(email)).findFirst().get();
+
+        Optional<User> foundUser = users.stream().filter(user -> user.getEmail().equals(email)).findFirst();
+
+        return foundUser.orElse(null);
     }
 
     //Get all users and filters for a specified username
