@@ -25,6 +25,12 @@ public class Scores {
     @Column(nullable = false)
     private boolean complete;
 
+    public Scores(Integer score, String username, boolean complete){
+        this.score = score;
+        this.username = username;
+        this.complete = complete;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -31,14 +31,6 @@ public class UserController {
         return userServices.findByUsername(username);
     }
 
-    //Post user
-//    @PostMapping("")
-//    public String addUser(@RequestBody User user){
-//        return userServices.addUser(user);
-//    }
-
-
-
     @PutMapping("/score/{username}")
     public String addScore(@PathVariable String username,
                            @RequestBody Scores score){

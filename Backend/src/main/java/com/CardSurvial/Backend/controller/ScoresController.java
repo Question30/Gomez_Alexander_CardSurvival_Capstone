@@ -3,9 +3,7 @@ package com.CardSurvial.Backend.controller;
 import com.CardSurvial.Backend.model.Scores;
 import com.CardSurvial.Backend.service.ScoresServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,15 @@ public class ScoresController {
     @GetMapping("/topScores")
     public List<Scores> findTopScores(){
         return scoresServices.getTopScores();
+    }
+
+    @PostMapping("/addScore")
+    public void addScore(@RequestBody Scores scores){
+        scoresServices.addScore(scores);
+    }
+
+    @PutMapping("/updateScore/{id}")
+    public void updateScore(@RequestBody Scores scores, @PathVariable Integer id){
+        scoresServices.updateScore(scores, id);
     }
 }
