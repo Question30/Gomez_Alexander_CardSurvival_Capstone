@@ -94,4 +94,14 @@ public class ScoreControllerTest {
 
         verify(scoresServices, times(1)).updateScore(any(Scores.class), eq(id));
     }
+
+    @Test
+    public void testDeleteScore() throws Exception {
+        Integer scoreId = 1;
+
+        mockMvc.perform(delete("/api/scores/{id}", scoreId))
+                .andExpect(status().isOk());
+
+        verify(scoresServices, times(1)).deleteSCore(eq(scoreId));
+    }
 }

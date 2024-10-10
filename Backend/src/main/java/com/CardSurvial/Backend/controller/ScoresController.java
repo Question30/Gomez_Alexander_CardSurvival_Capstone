@@ -33,4 +33,9 @@ public class ScoresController {
     public void updateScore(@RequestBody Scores scores, @PathVariable Integer id){
         scoresServices.updateScore(scores, id);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteScore(@PathVariable Integer id){
+        scoresServices.deleteSCore(id);
+    }
 }

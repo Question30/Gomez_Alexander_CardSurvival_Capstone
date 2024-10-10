@@ -46,4 +46,11 @@ public class ScoresServices {
 
      }
 
+     public void deleteSCore(Integer id){
+        Optional<Scores> score = scoresRepository.findById(id);
+        if(score.isPresent()){
+            scoresRepository.deleteById(id);
+        }
+     }
+
 }
